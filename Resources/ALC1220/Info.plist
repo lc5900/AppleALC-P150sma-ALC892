@@ -14,7 +14,7 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Toleda - Realtek ALC1220</string>
+				<string>Toleda - Realtek ALC1220, 5/6 audio ports, native: 2 inputs, 3/4 outputs+front panel+SPDIF/Optical</string>
 				<key>Id</key>
 				<integer>1</integer>
 				<key>Path</key>
@@ -22,11 +22,19 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Toleda - Realtek ALC1220</string>
+				<string>Toleda - Realtek ALC1220, 3 audio ports, repurposed to 5.1: 0 inputs, 3 outputs+front panel+SPDIF/Optical</string>
 				<key>Id</key>
 				<integer>2</integer>
 				<key>Path</key>
 				<string>layout2.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Toleda - Realtek ALC1220, 3 audio ports, native: 2 inputs, 1 output+front panel+SPDIF/Optical</string>
+				<key>Id</key>
+				<integer>3</integer>
+				<key>Path</key>
+				<string>layout3.xml.zlib</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -60,6 +68,22 @@
 				<key>Path</key>
 				<string>layout13.xml.zlib</string>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>fleaplus - ALC1220 for MSI WT75</string>
+				<key>Id</key>
+				<integer>15</integer>
+				<key>Path</key>
+				<string>layout15.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>MacPeet - ALC1220 for Gigabyte Z390</string>
+				<key>Id</key>
+				<integer>16</integer>
+				<key>Path</key>
+				<string>layout16.xml.zlib</string>
+			</dict>
 		</array>
 		<key>Platforms</key>
 		<array>
@@ -76,6 +100,14 @@
 				<string>Toleda - Realtek ALC1220</string>
 				<key>Id</key>
 				<integer>2</integer>
+				<key>Path</key>
+				<string>PlatformsT.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Toleda - Realtek ALC1220</string>
+				<key>Id</key>
+				<integer>3</integer>
 				<key>Path</key>
 				<string>PlatformsT.xml.zlib</string>
 			</dict>
@@ -110,6 +142,22 @@
 				<integer>13</integer>
 				<key>Path</key>
 				<string>Platforms13.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>fleaplus - ALC1220 for MSI WT75</string>
+				<key>Id</key>
+				<integer>15</integer>
+				<key>Path</key>
+				<string>Platforms15.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>MacPeet - ALC1220 for Gigabyte Z390</string>
+				<key>Id</key>
+				<integer>16</integer>
+				<key>Path</key>
+				<string>Platforms16.xml.zlib</string>
 			</dict>
 		</array>
 	</dict>
@@ -194,6 +242,7 @@
 	</array>
 	<key>Revisions</key>
 	<array>
+		<integer>1048833</integer>
 		<integer>1048579</integer>
 	</array>
 	<key>Vendor</key>

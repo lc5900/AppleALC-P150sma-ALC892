@@ -64,10 +64,16 @@ private:
 	static void platformLoadCallback(uint32_t requestTag, kern_return_t result, const void *resourceData, uint32_t resourceDataLength, void *context);
 
 	/**
+	 *  Hooked AppleGFXHDA probe
+	 */
+	static IOService *gfxProbe(IOService *ctrl, IOService *provider, SInt32 *score);
+
+	/**
 	 *  Trampolines for original method invocations
 	 */
 	mach_vm_address_t orgLayoutLoadCallback {0};
 	mach_vm_address_t orgPlatformLoadCallback {0};
+	mach_vm_address_t orgGfxProbe {0};
 
 	/**
 	 *  @enum IOAudioDevicePowerState
@@ -84,14 +90,13 @@ private:
 	};
 
 	/**
-	 *  Checks whether this driver is attached to HDEF
+	 *  Obtain HDEF and HDAU layout-id
 	 *
 	 *  @param hdaDriver  ioreg driver instance
-	 *  @param layout     layout-id value in HDEF parent
 	 *
-	 *  @return true on successful find
+	 *  @return layout-id on successful find or 0
 	 */
-	static bool isAnalogAudio(IOService *hdaDriver, uint32_t *layout=nullptr);
+	static uint32_t getAudioLayout(IOService *hdaDriver);
 
 	/**
 	 *  Hooked performPowerChange method triggering a verb sequence on wake
@@ -153,6 +158,14 @@ private:
 	 *  @return true if anything suitable found
 	 */
 	bool validateCodecs();
+	
+	/**
+	 *  Checks for a set no-controller-injection property.
+	 *  @param hdaService  audio device
+	 *
+	 *  @return true if the controller should be injected
+	 */
+	bool validateInjection(IORegistryEntry *hdaService);
 
 	/**
 	 *  Apply kext patches for loaded kext index
@@ -186,11 +199,11 @@ private:
 	 *  Controller identification and modification info
 	 */
 	class ControllerInfo {
-		ControllerInfo(uint32_t ven, uint32_t dev, uint32_t rev, uint32_t p, uint32_t lid, bool d) :
-		vendor(ven), device(dev), revision(rev), platform(p), layout(lid), detect(d) {}
+		ControllerInfo(uint32_t ven, uint32_t dev, uint32_t rev, uint32_t p, uint32_t lid, bool d, bool np) :
+		vendor(ven), device(dev), revision(rev), platform(p), layout(lid), detect(d), nopatch(np) {}
 	public:
-		static ControllerInfo *create(uint32_t ven, uint32_t dev, uint32_t rev, uint32_t p, uint32_t lid, bool d) {
-			return new ControllerInfo(ven, dev, rev, p, lid, d);
+		static ControllerInfo *create(uint32_t ven, uint32_t dev, uint32_t rev, uint32_t p, uint32_t lid, bool d, bool np) {
+			return new ControllerInfo(ven, dev, rev, p, lid, d, np);
 		}
 		static void deleter(ControllerInfo *info) { delete info; }
 		const ControllerModInfo *info {nullptr};
@@ -201,6 +214,7 @@ private:
 		uint32_t const platform {ControllerModInfo::PlatformAny};
 		uint32_t const layout;
 		bool const detect;
+		bool const nopatch;
 	};
 
 	/**
@@ -212,8 +226,8 @@ private:
 	/**
 	 *  Insert a controller with given parameters
 	 */
-	void insertController(uint32_t ven, uint32_t dev, uint32_t rev, uint32_t p=ControllerModInfo::PlatformAny, uint32_t lid=0, bool d=false, const CodecLookupInfo *lookup = nullptr) {
-		auto controller = ControllerInfo::create(ven, dev, rev, p, lid, d);
+	void insertController(uint32_t ven, uint32_t dev, uint32_t rev, bool np, uint32_t p=ControllerModInfo::PlatformAny, uint32_t lid=0, bool d=false, const CodecLookupInfo *lookup = nullptr) {
+		auto controller = ControllerInfo::create(ven, dev, rev, p, lid, d, np);
 		if (controller) {
 			if (controllers.push_back(controller)) {
 				controller->lookup = lookup;
@@ -271,11 +285,6 @@ private:
 	int computerModel {WIOKit::ComputerModel::ComputerInvalid};
 
 	/**
-	 *  Set when we do not want to perform verb reinitialisation
-	 */
-	bool receivedSleepEvent {false};
-
-	/**
 	 *  HDAConfigDefault availability in AppleALC
 	 */
 	enum class WakeVerbMode {
@@ -283,11 +292,6 @@ private:
 		Enable,
 		Disable
 	};
-
-	/**
-	 *  Marks HDAConfigDefault availability in AppleALC
-	 */
-	WakeVerbMode hasHDAConfigDefault {WakeVerbMode::Detect};
 
 	/**
 	 *  Total available NVIDIA HDAU device-ids in 10.13 and newer

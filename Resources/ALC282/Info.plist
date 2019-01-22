@@ -38,6 +38,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Custom ALC282 lenovo y430p by loverto</string>
+				<key>Id</key>
+				<integer>22</integer>
+				<key>Path</key>
+				<string>layout22.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Skvo ALC282 Acer Aspire on IvyBridge by Andrey1970</string>
 				<key>Id</key>
 				<integer>27</integer>
@@ -59,6 +67,30 @@
 				<integer>29</integer>
 				<key>Path</key>
 				<string>layout29.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Custom ALC282 Lenovo Y410P by yunsur</string>
+				<key>Id</key>
+				<integer>41</integer>
+				<key>Path</key>
+				<string>layout41.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Custom ALC282 Lenovo Y430P by yunsur</string>
+				<key>Id</key>
+				<integer>43</integer>
+				<key>Path</key>
+				<string>layout43.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Custom ALC282 Lenovo Y510P by yunsur</string>
+				<key>Id</key>
+				<integer>51</integer>
+				<key>Path</key>
+				<string>layout51.xml.zlib</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -113,6 +145,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Custom ALC282 lenovo y430p by loverto</string>
+				<key>Id</key>
+				<integer>22</integer>
+				<key>Path</key>
+				<string>Platforms22.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Skvo ALC282 Acer Aspire on IvyBridge by Andrey1970</string>
 				<key>Id</key>
 				<integer>27</integer>
@@ -134,6 +174,30 @@
 				<integer>29</integer>
 				<key>Path</key>
 				<string>Platforms29.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Custom ALC282 Lenovo Y410P by yunsur</string>
+				<key>Id</key>
+				<integer>41</integer>
+				<key>Path</key>
+				<string>Platforms41.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Custom ALC282 Lenovo Y430P by yunsur</string>
+				<key>Id</key>
+				<integer>43</integer>
+				<key>Path</key>
+				<string>Platforms43.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Custom ALC282 Lenovo Y510P by yunsur</string>
+				<key>Id</key>
+				<integer>51</integer>
+				<key>Path</key>
+				<string>Platforms51.xml.zlib</string>
 			</dict>
 			<dict>
 				<key>Comment</key>

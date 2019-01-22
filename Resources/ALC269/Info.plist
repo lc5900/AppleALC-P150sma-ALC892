@@ -134,6 +134,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>MacPeet - Latte Panda</string>
+				<key>Id</key>
+				<integer>17</integer>
+				<key>Path</key>
+				<string>layout17.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Hypereitan - ALC269VC for Thinkpad X230 i7</string>
 				<key>Id</key>
 				<integer>18</integer>
@@ -230,6 +238,30 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Laptop patch ALC269VC Samsung _NP350V5C - Giesteira</string>
+				<key>Id</key>
+				<integer>44</integer>
+				<key>Path</key>
+				<string>layout44.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>maiconjs (Wolfield) - Asus A45A 269VB1</string>
+				<key>Id</key>
+				<integer>45</integer>
+				<key>Path</key>
+				<string>layout45.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>ALC269VC for Thinkpad X230 with dock4338</string>
+				<key>Id</key>
+				<integer>55</integer>
+				<key>Path</key>
+				<string>layout55.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>HASEE Z6-i78154S2 ALC269 by lianny </string>
 				<key>Id</key>
 				<integer>58</integer>
@@ -254,6 +286,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>ALC269 for MECHREVO X8Ti Plus by DalianSky</string>
+				<key>Id</key>
+				<integer>88</integer>
+				<key>Path</key>
+				<string>layout88.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>ALC269 Asus K53SJ, Asus G73s Mod by Andrey1970 (No input boost - no noise in Siri)</string>
 				<key>Id</key>
 				<integer>93</integer>
@@ -275,6 +315,14 @@
 				<integer>127</integer>
 				<key>Path</key>
 				<string>layout127.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>ALC269VC for Lenovo Y500 by BaoStorm</string>
+				<key>Id</key>
+				<integer>188</integer>
+				<key>Path</key>
+				<string>layout188.xml.zlib</string>
 			</dict>
 		</array>
 		<key>Platforms</key>
@@ -401,6 +449,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>MacPeet - Latte Panda</string>
+				<key>Id</key>
+				<integer>17</integer>
+				<key>Path</key>
+				<string>Platforms17.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Hypereitan - ALC269VC for Thinkpad X230 i7</string>
 				<key>Id</key>
 				<integer>18</integer>
@@ -497,6 +553,30 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Laptop patch ALC269VC Samsung _NP350V5C - Giesteira</string>
+				<key>Id</key>
+				<integer>44</integer>
+				<key>Path</key>
+				<string>Platforms44.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>maiconjs (Wolfield) - Asus A45A 269VB1</string>
+				<key>Id</key>
+				<integer>45</integer>
+				<key>Path</key>
+				<string>Platforms45.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>ALC269VC for Thinkpad X230 with dock4338</string>
+				<key>Id</key>
+				<integer>55</integer>
+				<key>Path</key>
+				<string>Platforms55.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>HASEE Z6-i78154S2 ALC269 by lianny </string>
 				<key>Id</key>
 				<integer>58</integer>
@@ -521,6 +601,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>ALC269 for MECHREVO X8Ti Plus by DalianSky</string>
+				<key>Id</key>
+				<integer>88</integer>
+				<key>Path</key>
+				<string>Platforms88.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>ALC269 Asus K53SJ, Asus G73s Mod by Andrey1970 (No input boost - no noise in Siri)</string>
 				<key>Id</key>
 				<integer>93</integer>
@@ -542,6 +630,14 @@
 				<integer>127</integer>
 				<key>Path</key>
 				<string>Platforms127.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>ALC269VC for Lenovo Y500 by BaoStorm</string>
+				<key>Id</key>
+				<integer>188</integer>
+				<key>Path</key>
+				<string>Platforms188.xml.zlib</string>
 			</dict>
 		</array>
 	</dict>

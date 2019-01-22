@@ -14,7 +14,23 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Toleda ALC887</string>
+				<string>Realtek 887-VD for Asus B85-ME by maiconjs</string>
+				<key>Id</key>
+				<integer>40</integer>
+				<key>Path</key>
+				<string>layout40.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Realtek 887-VD AD0 for Asus Z97M-PLUS/BR by maiconjs</string>
+				<key>Id</key>
+				<integer>20</integer>
+				<key>Path</key>
+				<string>layout20.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Toleda ALC887, 5/6 audio ports, native: 2 inputs, 3/4 outputs+front panel+SPDIF/Optical</string>
 				<key>Id</key>
 				<integer>1</integer>
 				<key>Path</key>
@@ -22,7 +38,7 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Toleda ALC887</string>
+				<string>Toleda ALC887 3 audio ports, repurposed to 5.1: 0 inputs, 3 outputs+front panel+SPDIF/Optical</string>
 				<key>Id</key>
 				<integer>2</integer>
 				<key>Path</key>
@@ -30,7 +46,7 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Toleda ALC887</string>
+				<string>Toleda ALC887, 3 audio ports, native: 2 inputs, 1 output+front panel+SPDIF/Optical</string>
 				<key>Id</key>
 				<integer>3</integer>
 				<key>Path</key>
@@ -94,6 +110,22 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>0th3r ALC887 for PRIME B250-PLUS</string>
+				<key>Id</key>
+				<integer>50</integer>
+				<key>Path</key>
+				<string>layout50.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>ctich ALC887 for Asus PRIME Z270-P</string>
+				<key>Id</key>
+				<integer>52</integer>
+				<key>Path</key>
+				<string>layout52.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Custom by Constanta</string>
 				<key>Id</key>
 				<integer>99</integer>
@@ -103,6 +135,22 @@
 		</array>
 		<key>Platforms</key>
 		<array>
+			<dict>
+				<key>Comment</key>
+				<string>Realtek 887-VD for Asus B85-ME by maiconjs</string>
+				<key>Id</key>
+				<integer>40</integer>
+				<key>Path</key>
+				<string>Platforms40.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Realtek 887-VD AD0 for Asus Z97M-PLUS/BR by maiconjs</string>
+				<key>Id</key>
+				<integer>20</integer>
+				<key>Path</key>
+				<string>Platforms20.xml.zlib</string>
+			</dict>
 			<dict>
 				<key>Comment</key>
 				<string>Toleda</string>
@@ -182,6 +230,22 @@
 				<integer>33</integer>
 				<key>Path</key>
 				<string>Platforms33.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>0th3r ALC887 for PRIME B250-PLUS</string>
+				<key>Id</key>
+				<integer>50</integer>
+				<key>Path</key>
+				<string>Platforms50.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>ctich ALC887 for Asus PRIME Z270-P</string>
+				<key>Id</key>
+				<integer>52</integer>
+				<key>Path</key>
+				<string>Platforms52.xml.zlib</string>
 			</dict>
 			<dict>
 				<key>Comment</key>

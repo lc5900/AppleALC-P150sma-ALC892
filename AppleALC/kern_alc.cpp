@@ -18,10 +18,15 @@
 static AlcEnabler *callbackAlc;
 
 void AlcEnabler::init() {
+	callbackAlc = this;
+
 	lilu.onPatcherLoadForce(
 	[](void *user, KernelPatcher &pathcer) {
 		static_cast<AlcEnabler *>(user)->updateProperties();
 	}, this);
+
+	if (getKernelVersion() < KernelVersion::Mojave)
+		ADDPR(kextList)[KextIdAppleGFXHDA].switchOff();
 
 	lilu.onKextLoadForce(ADDPR(kextList), ADDPR(kextListSize),
 	[](void *user, KernelPatcher &patcher, size_t index, mach_vm_address_t address, size_t size) {
@@ -30,7 +35,10 @@ void AlcEnabler::init() {
 
 	if (getKernelVersion() >= KernelVersion::Sierra) {
 		// Unlock custom audio engines by disabling Apple private entitlement verification
+		// Recent macOS versions (e.g. 10.13.6) support legacy_hda_tools_support=1 boot argument, which works similarly.
 		if (checkKernelArgument("-alcdhost")) {
+			if (getKernelVersion() >= KernelVersion::HighSierra)
+				SYSLOG("alc", "consider replacing -alcdhost with legacy_hda_tools_support=1 boot-arg!");
 			lilu.onEntitlementRequestForce([](void *user, task_t task, const char *entitlement, OSObject *&original) {
 				static_cast<AlcEnabler *>(user)->handleAudioClientEntitlement(task, entitlement, original);
 			}, this);
@@ -50,14 +58,14 @@ void AlcEnabler::updateProperties() {
 		bool hasBuiltinDigitalAudio = !devInfo->reportedFramebufferIsConnectorLess && devInfo->videoBuiltin;
 
 		// Firstly, update Haswell or Broadwell HDAU device for built-in digital audio.
-		if (devInfo->audioBuiltinDigital) {
+		if (devInfo->audioBuiltinDigital && validateInjection(devInfo->audioBuiltinDigital)) {
 			if (hasBuiltinDigitalAudio) {
 				// This is a normal HDAU device for an IGPU with connectors.
 				updateDeviceProperties(devInfo->audioBuiltinDigital, devInfo, "onboard-1", false);
 				uint32_t dev = 0, rev = 0;
 				if (WIOKit::getOSDataValue(devInfo->audioBuiltinDigital, "device-id", dev) &&
 					WIOKit::getOSDataValue(devInfo->audioBuiltinDigital, "revision-id", rev))
-					insertController(WIOKit::VendorID::Intel, dev, rev, devInfo->reportedFramebufferId);
+					insertController(WIOKit::VendorID::Intel, dev, rev, nullptr != devInfo->audioBuiltinDigital->getProperty("no-controller-patch"), devInfo->reportedFramebufferId);
 			} else {
 				// Terminate built-in HDAU audio, as we are using no connectors!
 				auto hda = OSDynamicCast(IOService, devInfo->audioBuiltinDigital);
@@ -74,7 +82,7 @@ void AlcEnabler::updateProperties() {
 		}
 
 		// Secondly, update HDEF device and make it support digital audio
-		if (devInfo->audioBuiltinAnalog) {
+		if (devInfo->audioBuiltinAnalog && validateInjection(devInfo->audioBuiltinAnalog)) {
 			const char *hdaGfx = nullptr;
 			if (hasBuiltinDigitalAudio && !devInfo->audioBuiltinDigital)
 				hdaGfx = "onboard-1";
@@ -82,13 +90,13 @@ void AlcEnabler::updateProperties() {
 		}
 
 		// Thirdly, update IGPU device in case we have digital audio
-		if (hasBuiltinDigitalAudio) {
-			devInfo->videoBuiltin->setProperty("hda-gfx", OSData::withBytes("onboard-1", sizeof("onboard-1")));
+		if (hasBuiltinDigitalAudio && validateInjection(devInfo->videoBuiltin)) {
+			devInfo->videoBuiltin->setProperty("hda-gfx", const_cast<char *>("onboard-1"), sizeof("onboard-1"));
 			if (!devInfo->audioBuiltinDigital) {
 				uint32_t dev = 0, rev = 0;
 				if (WIOKit::getOSDataValue(devInfo->videoBuiltin, "device-id", dev) &&
 					WIOKit::getOSDataValue(devInfo->videoBuiltin, "revision-id", rev))
-					insertController(WIOKit::VendorID::Intel, dev, rev, devInfo->reportedFramebufferId);
+					insertController(WIOKit::VendorID::Intel, dev, rev, nullptr != devInfo->videoBuiltin->getProperty("no-controller-patch"), devInfo->reportedFramebufferId);
 			}
 		}
 
@@ -96,18 +104,18 @@ void AlcEnabler::updateProperties() {
 
 		// Fourthly, update all the GPU devices if any
 		for (size_t gpu = 0; gpu < devInfo->videoExternal.size(); gpu++) {
-			auto hdaSevice = devInfo->videoExternal[gpu].audio;
+			auto hdaService = devInfo->videoExternal[gpu].audio;
 			auto gpuService = devInfo->videoExternal[gpu].video;
 
-			if (!hdaSevice)
+			if (!hdaService || !validateInjection(hdaService))
 				continue;
 
 			uint32_t ven = devInfo->videoExternal[gpu].vendor;
 			uint32_t dev = 0, rev = 0;
-			if (WIOKit::getOSDataValue(hdaSevice, "device-id", dev) &&
-				WIOKit::getOSDataValue(hdaSevice, "revision-id", rev)) {
+			if (WIOKit::getOSDataValue(hdaService, "device-id", dev) &&
+				WIOKit::getOSDataValue(hdaService, "revision-id", rev)) {
 				// Register the controller
-				insertController(ven, dev, rev);
+				insertController(ven, dev, rev, nullptr != hdaService->getProperty("no-controller-patch"));
 				// Disable the id in the list if any
 				if (ven == WIOKit::VendorID::NVIDIA) {
 					uint32_t device = (dev << 16) | WIOKit::VendorID::NVIDIA;
@@ -120,8 +128,8 @@ void AlcEnabler::updateProperties() {
 			// Refresh the main properties including hda-gfx.
 			char hdaGfx[16];
 			snprintf(hdaGfx, sizeof(hdaGfx), "onboard-%u", hdaGfxCounter++);
-			updateDeviceProperties(hdaSevice, devInfo, hdaGfx, false);
-			gpuService->setProperty("hda-gfx", OSData::withBytes(hdaGfx, static_cast<uint32_t>(strlen(hdaGfx)+1)));
+			updateDeviceProperties(hdaService, devInfo, hdaGfx, false);
+			gpuService->setProperty("hda-gfx", hdaGfx, static_cast<uint32_t>(strlen(hdaGfx)+1));
 
 			// Refresh connector types on NVIDIA, since they are required for HDMI audio to function.
 			// Abort if preexisting connector-types or no-audio-fixconn property is found.
@@ -132,7 +140,7 @@ void AlcEnabler::updateProperties() {
 					connector_type[1] = '0' + i;
 					if (!gpuService->getProperty(connector_type)) {
 						DBGLOG("alc", "fixing %s in gpu", connector_type);
-						gpuService->setProperty(connector_type, OSData::withBytes(builtBytes, sizeof(builtBytes)));
+						gpuService->setProperty(connector_type, builtBytes, sizeof(builtBytes));
 					} else {
 						DBGLOG("alc", "found existing %s in gpu", connector_type);
 						break;
@@ -170,12 +178,10 @@ void AlcEnabler::updateDeviceProperties(IORegistryEntry *hdaService, DeviceInfo 
 			uint32_t alcId;
 			if (WIOKit::getOSDataValue(hdaService, "alc-layout-id", alcId)) {
 				DBGLOG("alc", "found normal alc-layout-id %u", alcId);
-			} else if (info->firmwareVendor != DeviceInfo::FirmwareVendor::Apple) {
-				uint32_t legacyId;
-				if (WIOKit::getOSDataValue(hdaService, "layout-id", legacyId)) {
-					DBGLOG("audio", "found legacy alc-layout-id (from layout-id) %u", legacyId);
-					hdaService->setProperty("alc-layout-id", &legacyId, sizeof(legacyId));
-				}
+			} else if (info->firmwareVendor != DeviceInfo::FirmwareVendor::Apple &&
+					   WIOKit::getOSDataValue(hdaService, "layout-id", alcId)) {
+				DBGLOG("audio", "found legacy alc-layout-id (from layout-id) %u", alcId);
+				hdaService->setProperty("alc-layout-id", &alcId, sizeof(alcId));
 			}
 		}
 
@@ -206,7 +212,7 @@ void AlcEnabler::updateDeviceProperties(IORegistryEntry *hdaService, DeviceInfo 
 
 	// Pass onboard-X if requested.
 	if (hdaGfx)
-		hdaService->setProperty("hda-gfx", OSData::withBytes(hdaGfx, static_cast<uint32_t>(strlen(hdaGfx)+1)));
+		hdaService->setProperty("hda-gfx", const_cast<char *>(hdaGfx), static_cast<uint32_t>(strlen(hdaGfx)+1));
 
 	// Ensure built-in.
 	if (!hdaService->getProperty("built-in")) {
@@ -219,104 +225,111 @@ void AlcEnabler::updateDeviceProperties(IORegistryEntry *hdaService, DeviceInfo 
 }
 
 void AlcEnabler::layoutLoadCallback(uint32_t requestTag, kern_return_t result, const void *resourceData, uint32_t resourceDataLength, void *context) {
-	if (callbackAlc && callbackAlc->orgLayoutLoadCallback) {
-		DBGLOG("alc", "layoutLoadCallback %u %d %d %u %d", requestTag, result, resourceData != nullptr, resourceDataLength, context != nullptr);
-		callbackAlc->updateResource(Resource::Layout, result, resourceData, resourceDataLength);
-		DBGLOG("alc", "layoutLoadCallback done %u %d %d %u %d", requestTag, result, resourceData != nullptr, resourceDataLength, context != nullptr);
-		FunctionCast(layoutLoadCallback, callbackAlc->orgLayoutLoadCallback)(requestTag, result, resourceData, resourceDataLength, context);
-	} else {
-		SYSLOG("alc", "layout callback arrived at nowhere");
-	}
+	DBGLOG("alc", "layoutLoadCallback %u %d %d %u %d", requestTag, result, resourceData != nullptr, resourceDataLength, context != nullptr);
+	callbackAlc->updateResource(Resource::Layout, result, resourceData, resourceDataLength);
+	DBGLOG("alc", "layoutLoadCallback done %u %d %d %u %d", requestTag, result, resourceData != nullptr, resourceDataLength, context != nullptr);
+	FunctionCast(layoutLoadCallback, callbackAlc->orgLayoutLoadCallback)(requestTag, result, resourceData, resourceDataLength, context);
 }
 
 void AlcEnabler::platformLoadCallback(uint32_t requestTag, kern_return_t result, const void *resourceData, uint32_t resourceDataLength, void *context) {
-	if (callbackAlc && callbackAlc->orgPlatformLoadCallback) {
-		DBGLOG("alc", "platformLoadCallback %u %d %d %u %d", requestTag, result, resourceData != nullptr, resourceDataLength, context != nullptr);
-		callbackAlc->updateResource(Resource::Platform, result, resourceData, resourceDataLength);
-		DBGLOG("alc", "platformLoadCallback done %u %d %d %u %d", requestTag, result, resourceData != nullptr, resourceDataLength, context != nullptr);
-		FunctionCast(platformLoadCallback, callbackAlc->orgPlatformLoadCallback)(requestTag, result, resourceData, resourceDataLength, context);
-	} else {
-		SYSLOG("alc", "platform callback arrived at nowhere");
-	}
+	DBGLOG("alc", "platformLoadCallback %u %d %d %u %d", requestTag, result, resourceData != nullptr, resourceDataLength, context != nullptr);
+	callbackAlc->updateResource(Resource::Platform, result, resourceData, resourceDataLength);
+	DBGLOG("alc", "platformLoadCallback done %u %d %d %u %d", requestTag, result, resourceData != nullptr, resourceDataLength, context != nullptr);
+	FunctionCast(platformLoadCallback, callbackAlc->orgPlatformLoadCallback)(requestTag, result, resourceData, resourceDataLength, context);
 }
 
-bool AlcEnabler::isAnalogAudio(IOService *hdaDriver, uint32_t *layout) {
+IOService *AlcEnabler::gfxProbe(IOService *ctrl, IOService *provider, SInt32 *score) {
+	auto name = provider->getName();
+	DBGLOG("alc", "AppleGFXHDA probe for %s", safeString(name));
+
+	if (name && !strcmp(name, "HDEF")) {
+		// Starting with iMacPro custom audio cards are used on Apple hardware.
+		// On MacBookPro15,x and newer devices these custom audio cards are controlled by T2, and
+		// internal HDEF device is only used for HDMI audio output implemented via AppleGFXHDA kext,
+		// which does not know about analog audio. AppleHDA still supports HDEF devices with analog
+		// audio output as well as HDMI support for legacy devices, so we avoid AppleGFXHDA by all
+		// means for HDEF.
+		DBGLOG("alc", "avoiding AppleGFXHDA for HDEF device");
+		return nullptr;
+	}
+
+	return FunctionCast(gfxProbe, callbackAlc->orgGfxProbe)(ctrl, provider, score);
+}
+
+uint32_t AlcEnabler::getAudioLayout(IOService *hdaDriver) {
 	auto parent = hdaDriver->getParentEntry(gIOServicePlane);
-	bool valid = false;
+	uint32_t layout = 0;
 	while (parent) {
 		auto name = parent->getName();
-		if (name) {
-			valid = !strcmp(name, "HDEF");
-			if (valid && layout) {
-				auto p = OSDynamicCast(OSData, parent->getProperty("layout-id"));
-				if (p && p->getLength() == sizeof(uint32_t)) {
-					*layout = *static_cast<const uint32_t *>(p->getBytesNoCopy());
-					DBGLOG("alc", "isAnalogAudio found %u represented layout", *layout);
-				} else {
-					SYSLOG("alc", "isAnalogAudio found invalid represented layout in HDEF");
-				}
-			}
-			if (valid || !strcmp(name, "HDAU"))
-				break;
+		if (name && (!strcmp(name, "HDEF") || !strcmp(name, "HDAU"))) {
+			if (!WIOKit::getOSDataValue(parent, "layout-id", layout))
+				SYSLOG("alc", "failed to obtain layout-id from %s", name);
+			break;
 		}
 		parent = parent->getParentEntry(gIOServicePlane);
 	}
-	return valid;
+	return layout;
 }
 
 IOReturn AlcEnabler::performPowerChange(IOService *hdaDriver, uint32_t from, uint32_t to, unsigned int *timer) {
-	IOReturn ret = kIOReturnError;
-	if (callbackAlc && callbackAlc->orgPerformPowerChange && callbackAlc->orgInitializePinConfig) {
-		bool valid = isAnalogAudio(hdaDriver);
-		DBGLOG("alc", "performPowerChange %s from %u to %u in from sleep %d hdef %d detect %d",
-			safeString(hdaDriver->getName()), from, to, callbackAlc->receivedSleepEvent, valid, callbackAlc->hasHDAConfigDefault);
-		ret = FunctionCast(performPowerChange, callbackAlc->orgPerformPowerChange)(hdaDriver, from, to, timer);
-		if (valid && callbackAlc->hasHDAConfigDefault == WakeVerbMode::Enable) {
-			if (to == ALCAudioDeviceSleep) {
-				callbackAlc->receivedSleepEvent = true;
-			} else if (callbackAlc->receivedSleepEvent &&
-				(to == ALCAudioDeviceIdle || to == ALCAudioDeviceActive)) {
-				auto parent = OSDynamicCast(IOService, hdaDriver->getParentEntry(gIOServicePlane));
-				if (parent) {
-					DBGLOG("alc", "performPowerChange %s forcing wake verbs on %s", safeString(hdaDriver->getName()), safeString(parent->getName()));
-					auto forceRet = FunctionCast(initializePinConfig, callbackAlc->orgInitializePinConfig)(parent, ADDPR(selfInstance));
-					SYSLOG_COND(forceRet != kIOReturnSuccess, "alc", "force config reinitialize returned %08X", forceRet);
-				} else {
-					SYSLOG("alc", "cannot get hda driver parent for wake");
+	IOReturn ret = FunctionCast(performPowerChange, callbackAlc->orgPerformPowerChange)(hdaDriver, from, to, timer);
+
+	auto hdaCodec = hdaDriver ? OSDynamicCast(IOService, hdaDriver->getParentEntry(gIOServicePlane)) : nullptr;
+	if (hdaCodec) {
+		auto pinStatus = OSDynamicCast(OSBoolean, hdaCodec->getProperty("alc-pinconfig-status"));
+		auto sleepStatus = OSDynamicCast(OSBoolean, hdaCodec->getProperty("alc-sleep-status"));
+
+		if (pinStatus && sleepStatus) {
+			bool pin = pinStatus->getValue();
+			bool sleep = sleepStatus->getValue();
+			DBGLOG("alc", "power change %s at %s from %u to %u in from pin %d sleep %d",
+				   safeString(hdaDriver->getName()), safeString(hdaCodec->getName()), from, to, pin, sleep);
+
+			if (pin) {
+				if (to == ALCAudioDeviceSleep) {
+					hdaCodec->setProperty("alc-sleep-status", kOSBooleanTrue);
+				} else if (sleep && (to == ALCAudioDeviceIdle || to == ALCAudioDeviceActive)) {
+					DBGLOG("alc", "power change %s at %s forcing wake verbs", safeString(hdaDriver->getName()), safeString(hdaCodec->getName()));
+					auto forceRet = FunctionCast(initializePinConfig, callbackAlc->orgInitializePinConfig)(hdaCodec, hdaCodec);
+					SYSLOG_COND(forceRet != kIOReturnSuccess, "alc", "power change %s at %s forcing wake returned %08X",
+								safeString(hdaDriver->getName()), safeString(hdaCodec->getName()), forceRet);
+					hdaCodec->setProperty("alc-sleep-status", kOSBooleanFalse);
 				}
-				callbackAlc->receivedSleepEvent = false;
 			}
+
+		} else {
+			SYSLOG("alc", "power change failed to get pin %d sleep %d", pinStatus != nullptr, sleepStatus != nullptr);
 		}
+
 	} else {
-		SYSLOG("alc", "performPowerChange arrived at nowhere");
+		SYSLOG("alc", "power change failed to obtain hda codec");
 	}
+
 	return ret;
 }
 
 IOReturn AlcEnabler::initializePinConfig(IOService *hdaCodec, IOService *configDevice) {
-	IOReturn ret = kIOReturnError;
-	if (callbackAlc && callbackAlc->orgInitializePinConfig && configDevice) {
-		uint32_t appleLayout = 0;
-		bool valid = isAnalogAudio(hdaCodec, &appleLayout);
-		DBGLOG("alc", "initializePinConfig %s received hda " PRIKADDR ", config " PRIKADDR " config name %s, detect %d valid %d apple layout %u",
-			   safeString(hdaCodec->getName()), CASTKADDR(hdaCodec), CASTKADDR(configDevice),
-			   configDevice ? safeString(configDevice->getName()) : "(null config)",
-			   callbackAlc->hasHDAConfigDefault, valid, appleLayout);
-
-		if (valid && callbackAlc->hasHDAConfigDefault == WakeVerbMode::Detect) {
-			uint32_t analogCodec = 0;
-			uint32_t analogLayout = 0;
-			for (size_t i = 0, s = callbackAlc->codecs.size(); i < s; i++) {
-				if (callbackAlc->controllers[callbackAlc->codecs[i]->controller]->layout > 0) {
-					analogCodec = static_cast<uint32_t>(callbackAlc->codecs[i]->vendor) << 16 | callbackAlc->codecs[i]->codec;
-					analogLayout = callbackAlc->controllers[callbackAlc->codecs[i]->controller]->layout;
-					DBGLOG("alc", "discovered analog codec %08X and layout %u", analogCodec, analogLayout);
-					break;
-				}
+	if (hdaCodec && configDevice && !hdaCodec->getProperty("alc-pinconfig-status")) {
+		uint32_t appleLayout = getAudioLayout(hdaCodec);
+		uint32_t analogCodec = 0;
+		uint32_t analogLayout = 0;
+		for (size_t i = 0, s = callbackAlc->codecs.size(); i < s; i++) {
+			if (callbackAlc->controllers[callbackAlc->codecs[i]->controller]->layout > 0) {
+				analogCodec = static_cast<uint32_t>(callbackAlc->codecs[i]->vendor) << 16 | callbackAlc->codecs[i]->codec;
+				analogLayout = callbackAlc->controllers[callbackAlc->codecs[i]->controller]->layout;
+				break;
 			}
+		}
 
-			callbackAlc->hasHDAConfigDefault = WakeVerbMode::Disable;
-			auto configList = analogCodec > 0 ? OSDynamicCast(OSArray, configDevice->getProperty("HDAConfigDefault")) : nullptr;
+		DBGLOG("alc", "initializePinConfig %s received hda " PRIKADDR ", config " PRIKADDR " config name %s apple layout %u codec %08X layout %u",
+			   safeString(hdaCodec->getName()), CASTKADDR(hdaCodec), CASTKADDR(configDevice),
+			   configDevice ? safeString(configDevice->getName()) : "(null config)", appleLayout, analogCodec, analogLayout);
+
+		hdaCodec->setProperty("alc-pinconfig-status", kOSBooleanFalse);
+		hdaCodec->setProperty("alc-sleep-status", kOSBooleanFalse);
+
+		if (appleLayout && analogCodec && analogLayout) {
+			auto configList = OSDynamicCast(OSArray, configDevice->getProperty("HDAConfigDefault"));
 			if (configList) {
 				unsigned int total = configList->getCount();
 				DBGLOG("alc", "discovered HDAConfigDefault with %u entries", total);
@@ -338,9 +351,17 @@ IOReturn AlcEnabler::initializePinConfig(IOService *hdaCodec, IOService *configD
 								if (newConfig) {
 									// Replace the config list with a new list to avoid multiple iterations,
 									// and actually fix the LayoutID number we hook in.
-									newConfig->setObject("LayoutID", OSNumber::withNumber(appleLayout, 32));
+									auto num = OSNumber::withNumber(appleLayout, 32);
+									if (num) {
+										newConfig->setObject("LayoutID", num);
+										num->release();
+									}
 									const OSObject *obj {OSDynamicCast(OSObject, newConfig)};
-									configDevice->setProperty("HDAConfigDefault", OSArray::withObjects(&obj, 1));
+									auto arr = OSArray::withObjects(&obj, 1);
+									if (arr) {
+										configDevice->setProperty("HDAConfigDefault", arr);
+										arr->release();
+									}
 									if (reinit && reinit->getValue()) {
 										newConfig = OSDynamicCast(OSDictionary, newConfig->copyCollection());
 										if (newConfig) {
@@ -351,8 +372,13 @@ IOReturn AlcEnabler::initializePinConfig(IOService *hdaCodec, IOService *configD
 												newConfig->setObject("ConfigData", wakeConfigData);
 												newConfig->removeObject("WakeConfigData");
 											}
-											ADDPR(selfInstance)->setProperty("HDAConfigDefault", OSArray::withObjects(&obj, 1));
-											callbackAlc->hasHDAConfigDefault = WakeVerbMode::Enable;
+											// These will be same
+											auto arr = OSArray::withObjects(&obj, 1);
+											if (arr) {
+												hdaCodec->setProperty("HDAConfigDefault", arr);
+												hdaCodec->setProperty("alc-pinconfig-status", kOSBooleanTrue);
+												arr->release();
+											}
 										} else {
 											SYSLOG("alc", "failed to copy new HDAConfigDefault collection");
 										}
@@ -365,7 +391,7 @@ IOReturn AlcEnabler::initializePinConfig(IOService *hdaCodec, IOService *configD
 							}
 						} else {
 							SYSLOG("alc", "invalid CodecID %d or LayoutID %d at entry %u, pinconfigs are broken",
-								currCodec != nullptr, currLayout != nullptr, i);
+								   currCodec != nullptr, currLayout != nullptr, i);
 						}
 					} else {
 						SYSLOG("alc", "invalid HDAConfigDefault entry at %u, pinconfigs are broken", i);
@@ -374,12 +400,11 @@ IOReturn AlcEnabler::initializePinConfig(IOService *hdaCodec, IOService *configD
 			} else {
 				SYSLOG("alc", "invalid HDAConfigDefault, pinconfigs are broken");
 			}
+
 		}
-		ret = FunctionCast(initializePinConfig, callbackAlc->orgInitializePinConfig)(hdaCodec, configDevice);
-	} else {
-		SYSLOG("alc", "initializePinConfig arrived at nowhere");
 	}
-	return ret;
+
+	return FunctionCast(initializePinConfig, callbackAlc->orgInitializePinConfig)(hdaCodec, configDevice);
 }
 
 void AlcEnabler::handleAudioClientEntitlement(task_t task, const char *entitlement, OSObject *&original) {
@@ -418,6 +443,12 @@ void AlcEnabler::processKext(KernelPatcher &patcher, size_t index, mach_vm_addre
 	
 	if (kextIndex == ADDPR(kextListSize))
 		return;
+
+	if (kextIndex == KextIdAppleGFXHDA) {
+		KernelPatcher::RouteRequest request("__ZN21AppleGFXHDAController5probeEP9IOServicePi", gfxProbe, orgGfxProbe);
+		patcher.routeMultiple(index, &request, 1, address, size);
+		return;
+	}
 	
 	if (!(progressState & ProcessingState::ControllersLoaded)) {
 		grabControllers();
@@ -439,7 +470,7 @@ void AlcEnabler::processKext(KernelPatcher &patcher, size_t index, mach_vm_addre
 				continue;
 			}
 
-			DBGLOG("alc", "handling %lu controller vendor %08X with %lu patches", i, info->vendor, info->patchNum);
+			DBGLOG("alc", "handling %lu controller %X:%X with %lu patches", i, info->vendor, info->device, info->patchNum);
 			// Choose a free device-id for NVIDIA HDAU to support multigpu setups
 			if (info->vendor == WIOKit::VendorID::NVIDIA) {
 				for (size_t j = 0; j < info->patchNum; j++) {
@@ -459,7 +490,11 @@ void AlcEnabler::processKext(KernelPatcher &patcher, size_t index, mach_vm_addre
 					}
 				}
 			}
-			
+
+			if (controllers[i]->nopatch) {
+				DBGLOG("alc", "skipping %lu controller %X:%X:%X due to no-controller-patch", i, controllers[i]->vendor, controllers[i]->device, controllers[i]->revision);
+				continue;
+			}
 			applyPatches(patcher, index, info->patches, info->patchNum);
 		}
 
@@ -486,8 +521,6 @@ void AlcEnabler::processKext(KernelPatcher &patcher, size_t index, mach_vm_addre
 	}
 	
 	if ((progressState & ProcessingState::CallbacksWantRouting) && kextIndex == KextIdAppleHDA) {
-		callbackAlc = this;
-
 		KernelPatcher::RouteRequest requests[] {
 			KernelPatcher::RouteRequest("__ZN14AppleHDADriver18layoutLoadCallbackEjiPKvjPv", layoutLoadCallback, orgLayoutLoadCallback),
 			KernelPatcher::RouteRequest("__ZN14AppleHDADriver20platformLoadCallbackEjiPKvjPv", platformLoadCallback, orgPlatformLoadCallback),
@@ -538,14 +571,16 @@ void AlcEnabler::updateResource(Resource type, kern_return_t &result, const void
 
 void AlcEnabler::grabControllers() {
 	computerModel = WIOKit::getComputerModel();
+	auto sectPCI = WIOKit::findEntryByPrefix("/AppleACPIPlatformExpert", "PCI", gIOServicePlane);
 
 	for (size_t lookup = 0; lookup < ADDPR(codecLookupSize); lookup++) {
-		auto sect = WIOKit::findEntryByPrefix("/AppleACPIPlatformExpert", "PCI", gIOServicePlane);
+		auto sect = sectPCI;
 		
 		for (size_t i = 0; sect && i <= ADDPR(codecLookup)[lookup].controllerNum; i++) {
 			sect = WIOKit::findEntryByPrefix(sect, ADDPR(codecLookup)[lookup].tree[i], gIOServicePlane);
 			
 			if (sect && i == ADDPR(codecLookup)[lookup].controllerNum) {
+
 				// Nice, we found some controller, add it
 				uint32_t ven {0}, dev {0}, rev {0}, platform {ControllerModInfo::PlatformAny}, lid {0};
 				
@@ -567,7 +602,8 @@ void AlcEnabler::grabControllers() {
 					DBGLOG("alc", "AAPL,snb-platform-id %X was found in controller at %s", platform, ADDPR(codecLookup)[lookup].tree[i]);
 				}
 
-				insertController(ven, dev, rev, platform, lid, ADDPR(codecLookup)[lookup].detect, &ADDPR(codecLookup)[lookup]);
+				insertController(ven, dev, rev, platform, nullptr != sect->getProperty("no-controller-patch"), lid, ADDPR(codecLookup)[lookup].detect, &ADDPR(codecLookup)[lookup]);
+				break;
 			}
 		}
 	}
@@ -719,13 +755,22 @@ bool AlcEnabler::validateCodecs() {
 	return codecs.size() > 0;
 }
 
+bool AlcEnabler::validateInjection(IORegistryEntry *hdaService) {
+	// Check for no-controller-inject. If set, ignore the controller.
+	bool noControllerInject = nullptr != hdaService->getProperty("no-controller-inject");
+	if (noControllerInject)
+		SYSLOG("alc", "not injecting %s", safeString(hdaService->getName()));
+	
+	return !noControllerInject;
+}
+
 void AlcEnabler::applyPatches(KernelPatcher &patcher, size_t index, const KextPatch *patches, size_t patchNum) {
-	DBGLOG("alc", "applying patches for %lu kext", index);
 	for (size_t p = 0; p < patchNum; p++) {
 		auto &patch = patches[p];
 		if (patch.patch.kext->loadIndex == index) {
+			DBGLOG("alc", "checking patch %lu for %lu kext (%s)", p, index, patch.patch.kext->id);
 			if (patcher.compatibleKernel(patch.minKernel, patch.maxKernel)) {
-				DBGLOG("alc", "applying %lu patch for %lu kext", p, index);
+				DBGLOG("alc", "applying patch %lu  for %lu kext (%s)", p, index, patch.patch.kext->id);
 				patcher.applyLookupPatch(&patch.patch);
 				// Do not really care for the errors for now
 				patcher.clearError();

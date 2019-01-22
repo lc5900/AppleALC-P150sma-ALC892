@@ -14,7 +14,7 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Toleda Resources by FredWst, m-dudarev</string>
+				<string>Toleda Resources by FredWst, m-dudarev, 5/6 audio ports, native: 2 inputs, 3/4 outputs+front panel+SPDIF/Optical</string>
 				<key>Id</key>
 				<integer>1</integer>
 				<key>Path</key>
@@ -22,7 +22,7 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Toleda Resources by FredWst, m-dudarev</string>
+				<string>Toleda Resources by FredWst, m-dudarev, 3 audio ports, repurposed to 5.1: 0 inputs, 3 outputs+front panel+SPDIF/Optical</string>
 				<key>Id</key>
 				<integer>2</integer>
 				<key>Path</key>
@@ -30,7 +30,7 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Toleda Resources by FredWst, m-dudarev</string>
+				<string>Toleda Resources by FredWst, m-dudarev, 3 audio ports, native: 2 inputs, 1 output+front panel+SPDIF/Optical</string>
 				<key>Id</key>
 				<integer>3</integer>
 				<key>Path</key>
@@ -70,11 +70,28 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+
 				<string>P150SMA</string>
 				<key>Id</key>
 				<integer>55</integer>
 				<key>Path</key>
 				<string>layout55.xml.zlib</string>
+				</dict>
+			<dict>
+				<key>Comment</key>
+				<string>MacPeet - alc892 for MSi Z97S SLI Krait Edition</string>
+				<key>Id</key>
+				<integer>15</integer>
+				<key>Path</key>
+				<string>layout15.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>MacPeet - alc892 for MSI GL73-8RD</string>
+				<key>Id</key>
+				<integer>16</integer>
+				<key>Path</key>
+				<string>layout16.xml.zlib</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -177,11 +194,27 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+<<<<<<< HEAD
 				<string>P150SMA</string>
 				<key>Id</key>
 				<integer>55</integer>
 				<key>Path</key>
 				<string>Platforms55.xml.zlib</string>
+=======
+				<string>MacPeet - alc892 for MSi Z97S SLI Krait Edition</string>
+				<key>Id</key>
+				<integer>15</integer>
+				<key>Path</key>
+				<string>Platforms15.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>MacPeet - alc892 for MSI GL73-8RD</string>
+				<key>Id</key>
+				<integer>16</integer>
+				<key>Path</key>
+				<string>Platforms16.xml.zlib</string>
+>>>>>>> upstream/master
 			</dict>
 			<dict>
 				<key>Comment</key>

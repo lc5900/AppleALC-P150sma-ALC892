@@ -1,7 +1,83 @@
 AppleALC Changelog
 ==================
+#### v1.3.5
+- Added AD1988A layout-id 12 by chrome
+- Added ALC282 layout-id 41/43/51 for Lenovo Y410P/Y430P/Y510P by yunsur
+- Added CX8400 layout-id 12 for Elitebook 1050 G1 by tyufhl & kuque
+- Added ALC269VC layout-id 55 for Thinkpad X230 with Dock4338
+- Added ALC235 layout-id 15 for ASUS FX53VD by qiuchenly
+- Added Chinese readme
+- Added ALC255 layout-id 31 for ASUS UX360CA by cowpod
+- Added ALC269VC layout-id 188 for Lenovo Y500 by BaoStorm
+- Update audio layouts with fixes ALC887, ALC892, ALC1220, ALCS1220A and ALC1150 by toleda
+- Added ALC889 layout-id 2, 3 by toleda
+- Added ALCS1200A layout-id 1, 2, 3 by toleda
+- Added ALC256 layout-id 5  by chrome
+
+#### v1.3.4
+- Disabled AppleGFXHDA matching onto HDEF to force AppleHDA usage
+- Added Wern Apfel's menubar patch for CX20590
+- Added ALC255 layout-id 21 for Asus X441UA-WX096D by Andres ZeroCross
+- Added ALC255 layout-id 21 for Asus VivoBook Pro 15 CX8150 by Andres ZeroCross
+- Added ability to disable controller injection with property `no-controller-inject`
+- Added SigmaTel STAC9200 layout-id 11 for Dell Precision 390 by Goldfish64
+- Added support for HDMI Audio of Alienware Alpha GTX860M
+- Added ALC1220 layout-id 15 for MSI WT75 Laptop by fleaplus.
+- Fix ConfigData in  ALC256 (3246) for Dell Series by Insanelydeepak
+- Added ALC298 layout-id 21 for Lenovo 720S-15IKB by Andres ZeroCross
+- Added ALC236 layout-id 99 for Lenovo Air 13 IWL by DalianSky
+- Fix speaker volume slider CX8050
+- Enable NVIDIA HDMI patches for laptop GPUs
+- Added ALC280 layout-id 21 for Dell Precision ﻿T7610 ﻿Workstation by Andres ZeroCross
+- Added ALC295 layout-id 21 for Acer Nitro 5 Spin (NP515-51) by Andres ZeroCross
+- Added VIA VT1705 layout-id 21 for ECS H81H3-M4 (1.0A) by Andres ZeroCross
+- Added ALC269 layoutid=88 for MECHREVO X8Ti Plus by DalianSky
+- Added ALC662 layout-id 17 for HP Compaq Elite 8000 SFF by aloha_cn
+- Added ALC288 layout-id 23 for Dell XPS 9343 by yyfn
+- Added ALC892 layout-id 16 for MSI GL73-8RD by MacPeet
+- Change CX20585 layout-id 13 resources
+- Added ALC887 layout-id 52 for Asus PRIME Z270-P by ctich
+- Added AD1984A layout-id 44 by Giesteira
+- Added ALC269 layout-id 44 for Samsung _NP350V5C by Giesteira
+- Added ALC269 layout-id 17 by MacPeet
+- Added ALC1220 layout-id 16 for Gigabyte Z390 by MacPeet
+
+#### v1.3.3
+- Added ability to disable controller patching by injecting property 'no-controller-patch' (for use of FakePCIID_Intel_HDMI_Audio)
+- Fixed volume control for CX8200 with Wern Apfel patch from CX20724
+- Fixed patches for IDT92HD872_4 (IDT 76d9)
+- Added ALC235 layout-id 14 for Lenovo Y520/Y720 series by the-braveknight
+- Added ALC230 layout-id 20 for Lenovo Ideapad 320 by maiconjs
+- Added ALC887-VD AD0 layout-id 20 for Asus Z97M-PLUS/BR by maiconjs
+- Added ALC887-VD layout-id 40 for Asus B85-ME by maiconjs
+- Added ALC236 layout-id 16 for Lenovo Ideapad 320s 14ikb by RodionS
+- Added ALC885 layout-id 15 for GA-G33M-DS2R by MacPeet
+- Added ALC662 layout-id 15 for Acer Aspire A7600U All in One by MacPeet
+- Added ALC255 layout-id 30 for XiaoMi Notebook Air by HongyuS
+- Added CX20590 layout-id 13 and 14 for Lenovo T420 by tluck
+- Added ALC283 layout-id 44 for ThinkCentre M93z 10AF ALC283 by giesteira
+- Added ALC662v3 layout-id 16 for Lenovo ThinkCentre M92P SFF by phucnguyen.2411
+- Added ALC282 layout-id 22 for Lenovo Y430P  by lovert
+- Fixed CX20756 layout-id 13
+- Added ALC892 layout-id 15 for MSi Z97S SLI Krait Edition by MacPeet
+- Fix volume control for CX20756 layout-id 13 and external mic minor changes/fixes
+
+#### v1.3.2
+- Added ALC269 layout-id 45 for Asus A45A and K45 by maiconjs (Wolfield)
+- Added WakeConfigData for ALC892 layout-id 1 by FredWst
+- Added ALC295 layout-id 14 for Asus UX430UA by InsanelyDeepak
+- Added ALC295 layout-id 15 for ALC295/ALC3254 by InsanelyDeepak
+- Remove duplicate resources for ALC295 layout-id 12 on Asus UX430
+- Added ALC230 layout-id 13 for Lenovo 310-14ISK by Andres
+
 #### v1.3.1
 - Fixed incorrect unused HDAU termination
+- Fixed pinconfig refresh causing random init failures
+- Added ALC225/ALC3253 layout-id 30 for Dell Inspiron 17-7779 by Constanta
+- Added ALC295 layout-id 12 for Asus UX430 by hieplpvip
+- Added Realtek ALC256 (3246) layout-id 11 for dell 7559 by Rockjesus
+- Added ALC887 layout-id 50 for Asus PRIME B250-PLUS by 0th3r
+- Added ALC295 layout-id 1 for HP Envy x360 15-bp107tx by Damon
 
 #### v1.3.0
 - Requires Lilu 1.2.5 and higher and enabled on 10.14 by default
