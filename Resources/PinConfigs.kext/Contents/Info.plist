@@ -4424,6 +4424,26 @@
 					<key>CodecID</key>
 					<integer>283904146</integer>
 					<key>Comment</key>
+					<string>P150SMA</string>
+					<key>ConfigData</key>
+					<data>
+					ASccUAEnHQEBJx6mAScfmQFHHBABRx0BAUce
+					FwFHH5kBdxwvAXcdEAF3HgEBdx8AAYccYAGH
+					HRABhx6BAYcfAAGnHFABpx0QAacegQGnHwAB
+					txwwAbcdEAG3HiEBtx8AAeccQAHnHREB5x5F
+					AecfAAFHDAI=
+					</data>
+					<key>FuncGroup</key>
+					<integer>1</integer>
+					<key>LayoutID</key>
+					<integer>55</integer>
+				</dict>
+				<dict>
+					<key>AFGLowPowerState</key>
+					<data>AwAAAA==</data>
+					<key>CodecID</key>
+					<integer>283904146</integer>
+					<key>Comment</key>
 					<string>ALC892 for Clevo P751DMG by Cryse Hillmes</string>
 					<key>ConfigData</key>
 					<data>
