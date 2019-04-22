@@ -1,5 +1,34 @@
 AppleALC Changelog
 ==================
+#### v.1.3.7
+- VT2020_2021 anticlick patches by chrome
+- VT1802 anticlick patches by chrome
+- VT1705 anticlick patches by chrome
+- AD2000B anticlick patches by chrome
+- AD1988B anticlick patches by chrome
+- CA0132 added sоme anticlick patches by chrome
+- STAC9200 10.14.4 compatible anticlick patch by chrome
+- ALCS1200A 10.14.4 compatible anticlick patch by chrome
+- ALC891 10.14.4 compatible anticlick patch by chrome
+- ALC1150 10.14.4 compatible anticlick patch by chrome
+- Update resources for ALC298 layout-id 99 for XiaoMi Pro by stevezhengshiqi
+- Added ALC235 layout-id 16 for ASUS GL553VD by MacPeet  
+- Added ALC256 layout-id 57 for huawei honor magic book by ROSstudy
+
+#### v1.3.6
+- Update Revision 0x100001 for CX20751/2 (Toshiba Kira 107)
+- Added ALC255 layout-id 15 for Gigabyte Brix BRi5(H), BRi7(H)] by najdanovicivan
+- Added ALC295/ALC3254 for Dell Latitude 5290 by Unbelievable9
+- Fix ALC1220 audio after sleep
+- Added ALC1220 layout-id 27 for Gigabyte-Z370-HD3P by lostwolf
+- Added ALC299 layout-id 22 for Dell XPS 13 by andreszerocross
+- Added ALC887-VD layout-id 87 for GA-Z97-HD3 ver2.1 by varrtix
+- Update resources for ALC236 layout-id 18 by xiaoMGitHub
+- Added CX20753/4 layout-id 15 for Lenovo Thinkpad E580 by MacPeet
+- Added CX20753/4 layout-id 14 by InsanelyDeepak
+- Change ALC887 layout-id 52 for Asus PRIME Z270-P by ctich
+- Added ALC887 layout-id 53 for Asus PRIME Z270-P by ctich
+
 #### v1.3.5
 - Added AD1988A layout-id 12 by chrome
 - Added ALC282 layout-id 41/43/51 for Lenovo Y410P/Y430P/Y510P by yunsur
@@ -13,6 +42,29 @@ AppleALC Changelog
 - Added ALC889 layout-id 2, 3 by toleda
 - Added ALCS1200A layout-id 1, 2, 3 by toleda
 - Added ALC256 layout-id 5  by chrome
+- Fix headphone input in ALC255 layout-id 99 for XiaoMI Air by ourfor
+- Added ALC285 layout-id 21 by andreszerocross
+- Added ALC298 layout-id 22 by andreszerocross
+- Added ALC299 layout-id 21 by andreszerocross
+- Added CX20753 layout-id 21 by andreszerocross
+- Added ALC233 layout-id 21 by andreszerocross
+- Added IDT 92HD73C1X5 layout-id 21 by andreszerocross
+- Added ALC294 layout-id 21 by andreszerocross
+- Added ALC256 layout-id 21 by andreszerocross
+- Added CX8200 layout-id 21 by andreszerocross
+- Added CX20751/2 layout-id 21 by andreszerocross
+- Added ALC286 layout-id 11 for Lenovo Yoga3 pro by gdllzkusi
+- Added ALC236 layout-id 18 for LEGION Y7000/Y530 by xiaoMGitHub
+- Fixed ALC256 layout-id 56 by daliansky
+- Added 10.14.4 compatible anticlick patch by chrome
+- Added CX20757 layout-id 28 for Lenovo G510 by Z39
+- Simplified analog codec code to permit special locations like VMware or AMD
+- Added patches for AMD Zen controllers (0x1457, 0x15E3) thx Ydeng and AlGreyy
+- Added ALC898 layout-id 66 for Clevo P750DM2-G by chrome
+- Added ALC283 layout-id 15 for LENOVO IDEAPAD 14 by MacPeet
+- Added ALC671 layout-id 15 for Fujitsu  Esprimo C720 by MacPeet
+- Added ALC221 layout-id 15 for HP ELITE DESK 800 G1 by MacPeet
+- Added ALC269 layout-id 21 for Dell OptiPlex 7010 by Goldfish64
 
 #### v1.3.4
 - Disabled AppleGFXHDA matching onto HDEF to force AppleHDA usage

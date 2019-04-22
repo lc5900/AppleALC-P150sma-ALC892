@@ -14,22 +14,6 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Realtek 887-VD for Asus B85-ME by maiconjs</string>
-				<key>Id</key>
-				<integer>40</integer>
-				<key>Path</key>
-				<string>layout40.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Realtek 887-VD AD0 for Asus Z97M-PLUS/BR by maiconjs</string>
-				<key>Id</key>
-				<integer>20</integer>
-				<key>Path</key>
-				<string>layout20.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
 				<string>Toleda ALC887, 5/6 audio ports, native: 2 inputs, 3/4 outputs+front panel+SPDIF/Optical</string>
 				<key>Id</key>
 				<integer>1</integer>
@@ -102,11 +86,27 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Realtek 887-VD AD0 for Asus Z97M-PLUS/BR by maiconjs</string>
+				<key>Id</key>
+				<integer>20</integer>
+				<key>Path</key>
+				<string>layout20.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Custom by klblk for GA-Q87TN</string>
 				<key>Id</key>
 				<integer>33</integer>
 				<key>Path</key>
 				<string>layout33.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Realtek 887-VD for Asus B85-ME by maiconjs</string>
+				<key>Id</key>
+				<integer>40</integer>
+				<key>Path</key>
+				<string>layout40.xml.zlib</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -118,11 +118,19 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>ctich ALC887 for Asus PRIME Z270-P</string>
+				<string>ALC887 for Asus PRIME Z270-P (full Rear and Front, non auto-switch) by ctich</string>
 				<key>Id</key>
 				<integer>52</integer>
 				<key>Path</key>
 				<string>layout52.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>ALC887 for Asus PRIME Z270-P (Rear LineOut1, Mic - LineOut2, LineIn - LineOut3 - 5.1 and Front, non auto-switch) by ctich</string>
+				<key>Id</key>
+				<integer>53</integer>
+				<key>Path</key>
+				<string>layout53.xml.zlib</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -132,25 +140,17 @@
 				<key>Path</key>
 				<string>layout99.xml.zlib</string>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Realtek ALC887-VD GA-Z97 HD3 ver2.1 by varrtix</string>
+				<key>Id</key>
+				<integer>87</integer>
+				<key>Path</key>
+				<string>layout87.xml.zlib</string>
+			</dict>
 		</array>
 		<key>Platforms</key>
 		<array>
-			<dict>
-				<key>Comment</key>
-				<string>Realtek 887-VD for Asus B85-ME by maiconjs</string>
-				<key>Id</key>
-				<integer>40</integer>
-				<key>Path</key>
-				<string>Platforms40.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Realtek 887-VD AD0 for Asus Z97M-PLUS/BR by maiconjs</string>
-				<key>Id</key>
-				<integer>20</integer>
-				<key>Path</key>
-				<string>Platforms20.xml.zlib</string>
-			</dict>
 			<dict>
 				<key>Comment</key>
 				<string>Toleda</string>
@@ -225,11 +225,27 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Realtek 887-VD AD0 for Asus Z97M-PLUS/BR by maiconjs</string>
+				<key>Id</key>
+				<integer>20</integer>
+				<key>Path</key>
+				<string>Platforms20.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Custom by klblk for GA-Q87TN</string>
 				<key>Id</key>
 				<integer>33</integer>
 				<key>Path</key>
 				<string>Platforms33.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Realtek 887-VD for Asus B85-ME by maiconjs</string>
+				<key>Id</key>
+				<integer>40</integer>
+				<key>Path</key>
+				<string>Platforms40.xml.zlib</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -241,9 +257,17 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>ctich ALC887 for Asus PRIME Z270-P</string>
+				<string>ALC887 for Asus PRIME Z270-P (full Rear and Front, non auto-switch) by ctich</string>
 				<key>Id</key>
 				<integer>52</integer>
+				<key>Path</key>
+				<string>Platforms52.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>ALC887 for Asus PRIME Z270-P (Rear LineOut1, Mic - LineOut2, LineIn - LineOut3 - 5.1 and Front, non auto-switch) by ctich</string>
+				<key>Id</key>
+				<integer>53</integer>
 				<key>Path</key>
 				<string>Platforms52.xml.zlib</string>
 			</dict>
@@ -255,10 +279,30 @@
 				<key>Path</key>
 				<string>Platforms99.xml.zlib</string>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Realtek ALC887-VD GA-Z97 HD3 ver2.1 by varrtix</string>
+				<key>Id</key>
+				<string>87</string>
+				<key>Path</key>
+				<string>Platforms87.xml.zlib</string>
+			</dict>
 		</array>
 	</dict>
 	<key>Patches</key>
 	<array>
+		<dict>
+			<key>Count</key>
+			<integer>1</integer>
+			<key>Find</key>
+			<data>xgYASIu/aAE=</data>
+			<key>MinKernel</key>
+			<integer>18</integer>
+			<key>Name</key>
+			<string>AppleHDA</string>
+			<key>Replace</key>
+			<data>xgYBSIu/aAE=</data>
+		</dict>
 		<dict>
 			<key>Count</key>
 			<integer>1</integer>

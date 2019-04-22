@@ -166,6 +166,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Goldfish64 - ALC269VB for Dell Optiplex 7010</string>
+				<key>Id</key>
+				<integer>21</integer>
+				<key>Path</key>
+				<string>layout21.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Custom ALC269 Acer Aspire by Andrey1970</string>
 				<key>Id</key>
 				<integer>27</integer>
@@ -481,6 +489,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Goldfish64 - ALC269VB for Dell Optiplex 7010</string>
+				<key>Id</key>
+				<integer>21</integer>
+				<key>Path</key>
+				<string>Platforms21.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Custom ALC269 Acer Aspire by Andrey1970</string>
 				<key>Id</key>
 				<integer>27</integer>
@@ -643,6 +659,18 @@
 	</dict>
 	<key>Patches</key>
 	<array>
+		<dict>
+			<key>Count</key>
+			<integer>1</integer>
+			<key>Find</key>
+			<data>xgYASIu/aAE=</data>
+			<key>MinKernel</key>
+			<integer>18</integer>
+			<key>Name</key>
+			<string>AppleHDA</string>
+			<key>Replace</key>
+			<data>xgYBSIu/aAE=</data>
+		</dict>
 		<dict>
 			<key>Count</key>
 			<integer>1</integer>

@@ -30,6 +30,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Realtek ALC255 Gigabyte Brix BRI5(H) by Najdanovic Ivan</string>
+				<key>Id</key>
+				<string>15</string>
+				<key>Path</key>
+				<string>layout15.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>InsanelyDeepak - Realtek ALC255_v2</string>
 				<key>Id</key>
 				<integer>17</integer>
@@ -113,6 +121,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Realtek ALC255 Gigabyte Brix BRI5(H) by Najdanovic Ivan</string>
+				<key>Id</key>
+				<integer>15</integer>
+				<key>Path</key>
+				<string>Platforms15.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>InsanelyDeepak - Realtek ALC255_v2</string>
 				<key>Id</key>
 				<integer>17</integer>
@@ -179,6 +195,18 @@
 	</dict>
 	<key>Patches</key>
 	<array>
+		<dict>
+			<key>Count</key>
+			<integer>1</integer>
+			<key>Find</key>
+			<data>xgYASIu/aAE=</data>
+			<key>MinKernel</key>
+			<integer>18</integer>
+			<key>Name</key>
+			<string>AppleHDA</string>
+			<key>Replace</key>
+			<data>xgYBSIu/aAE=</data>
+		</dict>
 		<dict>
 			<key>Count</key>
 			<integer>1</integer>

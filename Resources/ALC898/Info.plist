@@ -86,6 +86,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Realtek ALC898 for Clevo P750DM2-G</string>
+				<key>Id</key>
+				<integer>66</integer>
+				<key>Path</key>
+				<string>layout66.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Realtek ALC898 for MSI GE62 7RE Apache Pro by spectra</string>
 				<key>Id</key>
 				<integer>98</integer>
@@ -185,6 +193,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Realtek ALC898 for Clevo P750DM2-G</string>
+				<key>Id</key>
+				<integer>66</integer>
+				<key>Path</key>
+				<string>Platforms66.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Realtek ALC898 for MSI GE62 7RE Apache Pro by spectra</string>
 				<key>Id</key>
 				<integer>98</integer>
@@ -211,6 +227,18 @@
 	</dict>
 	<key>Patches</key>
 	<array>
+		<dict>
+			<key>Count</key>
+			<integer>1</integer>
+			<key>Find</key>
+			<data>xgYASIu/aAE=</data>
+			<key>MinKernel</key>
+			<integer>18</integer>
+			<key>Name</key>
+			<string>AppleHDA</string>
+			<key>Replace</key>
+			<data>xgYBSIu/aAE=</data>
+		</dict>
 		<dict>
 			<key>Count</key>
 			<integer>1</integer>
