@@ -785,8 +785,8 @@
 			</dict>
 			<key>Outputs</key>
 			<array>
-				<string>Headphone</string>
 				<string>IntSpeaker</string>
+				<string>Headphone</string>
 				<string>SPDIFOut</string>
 			</array>
 			<key>PathMapID</key>

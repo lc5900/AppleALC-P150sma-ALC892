@@ -22,11 +22,27 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>MacPeet - Conexant CX8200 for HP ZbooK 15UG4</string>
+				<key>Id</key>
+				<integer>15</integer>
+				<key>Path</key>
+				<string>layout15.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Andres ZeroCross for HP Spectre 13-V130NG</string>
 				<key>Id</key>
 				<integer>21</integer>
 				<key>Path</key>
 				<string>layout21.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>frankiezdh - Conexant CX8200 for HP Probook 440 G5</string>
+				<key>Id</key>
+				<integer>23</integer>
+				<key>Path</key>
+				<string>layout23.xml.zlib</string>
 			</dict>
 		</array>
 		<key>Platforms</key>
@@ -41,11 +57,27 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>MacPeet - Conexant CX8200 for HP ZbooK 15UG4</string>
+				<key>Id</key>
+				<integer>15</integer>
+				<key>Path</key>
+				<string>Platforms15.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Andres ZeroCross for HP Spectre 13-V130NG</string>
 				<key>Id</key>
 				<integer>21</integer>
 				<key>Path</key>
 				<string>Platforms21.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>frankiezdh - Conexant CX8200 for HP Probook 440 G5</string>
+				<key>Id</key>
+				<integer>23</integer>
+				<key>Path</key>
+				<string>Platforms23.xml.zlib</string>
 			</dict>
 		</array>
 	</dict>
