@@ -7,6 +7,8 @@ env:
 matrix:
   include:
   - os: osx
+    name: "Build"
+    osx_image: xcode10.2
     compiler: clang
 
     script:
@@ -24,6 +26,8 @@ matrix:
       on:
         tags: true
   - os: osx
+    name: "Analyze Clang"
+    osx_image: xcode11
     compiler: clang
 
     script:
@@ -32,7 +36,16 @@ matrix:
       - xcodebuild analyze -quiet -scheme AppleALC -configuration Release CLANG_ANALYZER_OUTPUT=plist-html CLANG_ANALYZER_OUTPUT_DIR="$(pwd)/clang-analyze" && [ "$(find clang-analyze -name "*.html")" = "" ]
 
   - os: osx
+    name: "Analyze Coverity"
+    osx_image: xcode10.2
     compiler: clang
+
+    before_install:
+      - curl -Ls https://entrust.com/root-certificates/entrust_l1k.cer -o ~/entrust_l1k.crt || exit 1
+      - curl -LS https://curl.haxx.se/ca/cacert.pem -o ~/cacert.pem || exit 1
+      - cat ~/entrust_l1k.crt >> ~/cacert.pem || exit 1
+      - echo "cacert=\"$HOME/cacert.pem\"" > ~/.curlrc || exit 1
+      - echo "ca_certificate=$HOME/cacert.pem" > ~/.wgetrc || exit 1
 
     script:
       - echo "This script runs coverity..."

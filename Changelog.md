@@ -1,5 +1,66 @@
 AppleALC Changelog
 ==================
+#### v1.4.2
+- Added Conexant CX20632 layout-id 28 for HP EliteDesk by Halelluja12
+- Added wake verb for ALC1220 layout-id 34 for MSI P65 Creator / MSI GS65
+
+#### v1.4.1
+- Fixed memory leaks
+- Added AMD Radeon R9 Fury/R9 Fury X HDMI audio support
+- Added ALC256 layout-id 66 for ASUS Y5000U X507UBR by lgs3137
+- Added ALC235 layout-id 22 for Asus ROG GL553VD-FY380 by Andres ZeroCross
+- Added ALC892 layout-id 90 for GIGABYTE B360M M AORUS PRO by xunyard
+- Added ALC298 layout-id 32 for XPS 9570 8750H version by smallssnow
+- Added ALC292 layout-id 55 for Dell Latitude E6440/E6540 with docking station linein/lineout support by baesar0
+- Added ALC256 layout-id 97 for MateBook X Pro 2019 by DalianSky
+- Added ALC269 layout-id 100 for GPD P2 Max by DalianSky
+- Merged Lenovo Air13 IWL with WhiskeyLake Mobile PCH HD Audio
+- Added CX8200 layout-id 23 for HP Probook 440 G5 by frankiezdh
+
+#### v1.4.0
+- Unified release archive names
+- Added AMD Zen 2 controller patches by camielverdult
+- Added ALC274 layout-id 21 for Dell Inspiron 27-7777 AIO Series by Andres ZeroCross
+- Added ALC257 layout-id 18 for Lenovo Legion Y540 and Y7000-2019 by xiaoMGitHub
+- Added ALC289 layout-id 23 for Acer PT515-51 By Bugprogrammer and Rover
+- Added ALC285 layout 31 for Thinkpad X1E 8750H version by Flymin
+
+#### v1.3.9
+- Allow loading on 10.15 without `-lilubetaall`
+- Added ALC272 layout-id 18 for Lenovo B570 and B570e by Sniki
+- Added Conexant CX8070 (CX11880) layout-id 15 for Lenovo ThinkPad E590 by MacPeet
+- Added ALC1220 layout-id 29 for Z390 Aorus Ultra - Output SP/HP SwitchMode by MacPeet
+- Added Conexant CX8200 layout-id 15 for HP ZbooK 15UG4 by MacPeet
+- Update AD1984 layout-id 11 by MacPeet
+- Added ALC663 layout-id 15 for Fujitsu Celsius r670 by MacPeet
+- Added ALC700 layout-id 11 for NUC HC
+- Added AMD Vega-M HDMI
+- Added ALC235 layout-id 12 for Lenovo Rescuer 15ISK by Z39
+- Added ALC235 layout-id 21 for Lenovo C530 Desktop PC by Andres ZeroCross
+- Added ALC256 layout-id 22 for Asus VivoBook Pro 17 N705UDR by Andres ZeroCross
+- Added ALC255(3234) layout-id 11 for dell optiplex by Heporis
+- Added ALC256 layout-id 14 for Dell Series with Subwoofer courtesy of @insanelydeepak
+- Update ALC892 layout-id 97 by gitawake
+- Update ALC298 layout-id 66 for MECHREVO S1 by lgs3137
+- Added ALCS1220A layout-id 11 for Asus Z270-G (based on Mirone's layout 7) by Kushamot 
+
+#### v1.3.8
+- Fixed rare random audio init failure on 10.14
+- Added ALC255 (3246) layout-id 100 for alienware alpha r2 by DalianSky
+- Added ALC262 layout-id 7 for MS-7480N1 by DalianSky
+- Added ALC236 layout-id 54 for DELL-5488 by Daggeryu
+- Added ALC280 layout-id 16 for Optiplex 9020SFF by cowpod
+- Added ALC1220 layout-id 34 for MSI P65 Creator Laptop by CleverCoder
+- Added ALC892 layout-id 97 for Hasee K770e i7 D1 (P170sm-a) by gitawake
+- Fix Typo/Update Pinconfig ALC294 layout21 by Andres and Add HDAController patch for WhiskeyLake Notebook
+- Update PathMap for ALC298 layout-id 99 for XiaoMi-Pro
+- Added ALC892 layout-id 17 for MSI B150M MORTAR - SwitchMode by MacPeet
+- Added ALC892 layout-id 18 for MSI B150M MORTAR - ManualMode by MacPeet
+- Added ALC1220 layout-id 28 for Z390 Aorus Ultra - Output SP/HP Manualmode by MacPeet
+- Added VT1802 layout-id 65 for hasee K650D by ivothgle
+- Added ALCS1220A layout-id 20 and 21 for Asus ROG STRIX Z370-F Gaming by RodionS & Nacho
+- Added ALC270 layout-id 21 for Asus A46CB-WX024D Laptop by Andres ZeroCross
+
 #### v.1.3.7
 - VT2020_2021 anticlick patches by chrome
 - VT1802 anticlick patches by chrome

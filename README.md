@@ -1,7 +1,7 @@
 AppleALC
 ========
 
-[![Build Status](https://travis-ci.org/acidanthera/AppleALC.svg?branch=master)](https://travis-ci.org/acidanthera/AppleALC) [![Scan Status](https://scan.coverity.com/projects/16166/badge.svg?flat=1)](https://scan.coverity.com/projects/16166)
+[![Build Status](https://travis-ci.com/acidanthera/AppleALC.svg?branch=master)](https://travis-ci.com/acidanthera/AppleALC) [![Scan Status](https://scan.coverity.com/projects/16166/badge.svg?flat=1)](https://scan.coverity.com/projects/16166)
 
 An open source kernel extension enabling native macOS HD audio for not officially supported codecs without any filesystem modifications.
 
@@ -17,7 +17,7 @@ An open source kernel extension enabling native macOS HD audio for not officiall
 - Arbitrary kext patching
 - Custom platform/layout injection
 - Works with SIP / El Capitan
-- Currently compatible with 10.8-10.14
+- Currently compatible with 10.8-10.15
 
 #### Credits
 - [Apple](https://www.apple.com) for macOS  
