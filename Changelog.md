@@ -1,8 +1,19 @@
 AppleALC Changelog
 ==================
+#### v1.4.3
+- Added support for `No-hda-gfx` HDEF property disabling IGPU digital audio
+- Added CX8050 layout-id 13 for ASUS S410U/X411U by cowpod
+- Fix layout 13 CX8050 microphone after sleep by cowpod
+
 #### v1.4.2
 - Added Conexant CX20632 layout-id 28 for HP EliteDesk by Halelluja12
 - Added wake verb for ALC1220 layout-id 34 for MSI P65 Creator / MSI GS65
+- Added Conexant CX20632 layout 23 for  HP ProDesk 480 G4 by frankiezdh
+- Fix headphone and speaker switch not working for CX8200 HP Probook 440 G5
+- Added ALC1220 layout-id 21 for MSI GE63 Raider RGB 8RF by Andres ZeroCross
+- Added ALC292 layout-id 32 for Lenovo T450s by EchoEsprit
+- Fixed string Platforms97.xml.zlib Realtek ALC256 layout-id 97 by DalianSky
+- Fix ALC700 HeadPhones and SPDIF outputs by osy86
 
 #### v1.4.1
 - Fixed memory leaks
