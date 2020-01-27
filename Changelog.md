@@ -1,9 +1,20 @@
 AppleALC Changelog
 ==================
+#### v1.4.6
+- Add missing pinconfig ALC235 layout-id 16
+- Fixed speaker/headphone priority ALC700 layout-id 11
+- 300 Series PCH HD Audio is native in 10.14+
+
 #### v1.4.5
 - Update MuteGPIO and AMP Values ALC255 layout-id 21 by Andres ZeroCross
 - Added ALC272 layout-id 21 for  Lenovo All In One PC C440 by Andres ZeroCross
 - Conflict patches for NUC7 HDMI audio are deleted.
+- Added ALC285 layout-id 52 for Thinkpad P52 by liuyishengalan
+- Added  Intel 400 series controller (Comet Lake) by fewtarius
+- Added 4 channel support and fixed mute button to ALC256 layout 97
+- Added ALC1220 layout-id 99 for MiBook 2019 by Dynamix1997
+- Added ALC262 layout-id 66 for MS-7847 by Dynamix1997
+- Added ALC269VC layout-id 47 for Hasee K790s by Dynamix1997
 
 #### v1.4.4
 - Added ALC269 layout-id 12 for Asus Vivobook S200CE by chunnann

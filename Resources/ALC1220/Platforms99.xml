@@ -20,12 +20,10 @@
 	<key>PathMaps</key>
 	<array>
 		<dict>
-			<key>Comments</key>
-			<string>osy - NUC8i7HNK/NUC8i7HVK</string>
 			<key>PathMap</key>
 			<array>
-				<array> <!-- Internal Microphone -->
-					<array> <!-- Int Microphone 1 -->
+				<array>
+					<array>
 						<array>
 							<dict>
 								<key>Amp</key>
@@ -62,13 +60,13 @@
 								<integer>34</integer>
 							</dict>
 							<dict>
+								<key>Boost</key>
+								<integer>2</integer>
 								<key>NodeID</key>
 								<integer>18</integer>
 							</dict>
 						</array>
 					</array>
-				</array>
-				<array> <!-- Int Microphone 2 -->
 					<array>
 						<array>
 							<dict>
@@ -106,25 +104,20 @@
 								<integer>35</integer>
 							</dict>
 							<dict>
+								<key>Boost</key>
+								<integer>2</integer>
 								<key>NodeID</key>
-								<integer>19</integer>
+								<integer>24</integer>
 							</dict>
 						</array>
 					</array>
 				</array>
-				<array> <!-- Analog Output -->
-					<array> <!-- Rear Speaker Out -->
+				<array>
+					<array>
 						<array>
 							<dict>
-								<key>Amp</key>
-								<dict>
-									<key>MuteInputAmp</key>
-									<false/>
-									<key>PublishMute</key>
-									<true/>
-								</dict>
 								<key>NodeID</key>
-								<integer>27</integer>
+								<integer>26</integer>
 							</dict>
 							<dict>
 								<key>Amp</key>
@@ -144,28 +137,17 @@
 											<integer>2</integer>
 										</dict>
 									</array>
+									<key>MuteInputAmp</key>
+									<true/>
+									<key>PublishMute</key>
+									<true/>
 									<key>PublishVolume</key>
 									<true/>
 									<key>VolumeInputAmp</key>
 									<false/>
 								</dict>
 								<key>NodeID</key>
-								<integer>2</integer>
-							</dict>
-						</array>
-					</array>
-					<array> <!-- Front Headphone Output -->
-						<array>
-							<dict>
-								<key>Amp</key>
-								<dict>
-									<key>MuteInputAmp</key>
-									<false/>
-									<key>PublishMute</key>
-									<true/>
-								</dict>
-								<key>NodeID</key>
-								<integer>33</integer>
+								<integer>13</integer>
 							</dict>
 							<dict>
 								<key>Amp</key>
@@ -185,6 +167,78 @@
 											<integer>2</integer>
 										</dict>
 									</array>
+									<key>MuteInputAmp</key>
+									<true/>
+									<key>PublishMute</key>
+									<true/>
+									<key>PublishVolume</key>
+									<true/>
+									<key>VolumeInputAmp</key>
+									<false/>
+								</dict>
+								<key>NodeID</key>
+								<integer>3</integer>
+							</dict>
+						</array>
+					</array>
+					<array>
+						<array>
+							<dict>
+								<key>NodeID</key>
+								<integer>20</integer>
+							</dict>
+							<dict>
+								<key>Amp</key>
+								<dict>
+									<key>Channels</key>
+									<array>
+										<dict>
+											<key>Bind</key>
+											<integer>1</integer>
+											<key>Channel</key>
+											<integer>1</integer>
+										</dict>
+										<dict>
+											<key>Bind</key>
+											<integer>2</integer>
+											<key>Channel</key>
+											<integer>2</integer>
+										</dict>
+									</array>
+									<key>MuteInputAmp</key>
+									<true/>
+									<key>PublishMute</key>
+									<true/>
+									<key>PublishVolume</key>
+									<true/>
+									<key>VolumeInputAmp</key>
+									<false/>
+								</dict>
+								<key>NodeID</key>
+								<integer>12</integer>
+							</dict>
+							<dict>
+								<key>Amp</key>
+								<dict>
+									<key>Channels</key>
+									<array>
+										<dict>
+											<key>Bind</key>
+											<integer>1</integer>
+											<key>Channel</key>
+											<integer>1</integer>
+										</dict>
+										<dict>
+											<key>Bind</key>
+											<integer>2</integer>
+											<key>Channel</key>
+											<integer>2</integer>
+										</dict>
+									</array>
+									<key>MuteInputAmp</key>
+									<true/>
+									<key>PublishMute</key>
+									<true/>
 									<key>PublishVolume</key>
 									<true/>
 									<key>VolumeInputAmp</key>
@@ -192,29 +246,13 @@
 								</dict>
 								<key>NodeID</key>
 								<integer>2</integer>
-							</dict>
-						</array>
-					</array>
-				</array>
-				<array> <!-- Digital Output -->
-					<array> <!-- Rear SPDIF Output -->
-						<array>
-							<dict>
-								<key>NoPinSense</key>
-								<true/>
-								<key>NodeID</key>
-								<integer>30</integer>
-							</dict>
-							<dict>
-								<key>NodeID</key>
-								<integer>6</integer>
 							</dict>
 						</array>
 					</array>
 				</array>
 			</array>
 			<key>PathMapID</key>
-			<integer>11</integer>
+			<integer>47</integer>
 		</dict>
 	</array>
 </dict>
