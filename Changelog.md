@@ -1,9 +1,30 @@
 AppleALC Changelog
 ==================
+#### v1.4.8
+- MaxKernel HS for GM/GP
+- Support startup delay for AppleHDAController via `alc-delay` property or `alcdelay` boot-arg (in ms)
+
+#### v1.4.7
+- Added support for Intel C620 series PCH Audio
+- Fixed injected MaximumBootBeepVolume
+- Added ALC256 layout-id 23 by Andres ZeroCross for Razer Blade 15 RZ09-02705E75
+- Added mute button to ALC230 layout 20
+- Added ALC295 layout-id 23 for HP OMEN 15-AX000 by Lancet-z
+- Added ALC256 layout-id 16 for Dell 7000 Series with 2.1Ch by vicjl
+- Added ALC294 layout-id 66 for ASUS X542UQR by KKKIIINNN
+- Added ALC236 layout-id 12 for Lenovo Xiaoxin Air 14IKBR by AlexanderLake
+- Added ALC292 layout-id 15 for LENOVO THINKPAD T450_T450s_X240 - Manual by ModeMacPeet
+- Added ALC1220 layout-id 30 for Z370 AORUS Gaming 7 - Output SP/HP SwitchMode by MacPeet
+- Added ALC294 layout-id 28 for Asus ROG G531GD by ayatkyo
+- Added ALC255 layout-id 71 for Acer Aspire A515-51(G) by DoctorStrange96
+- Added ALC235 layout-id 17 for Lenovo ThinkCentre Tiny M720q by marianvlaza
+
 #### v1.4.6
 - Add missing pinconfig ALC235 layout-id 16
 - Fixed speaker/headphone priority ALC700 layout-id 11
 - 300 Series PCH HD Audio is native in 10.14+
+- Added ALC215 layout-id 18 for HP 830 G6 by 965987400abc
+- Added TCSEL change to TC0 for Intel codecs
 
 #### v1.4.5
 - Update MuteGPIO and AMP Values ALC255 layout-id 21 by Andres ZeroCross

@@ -5,111 +5,31 @@
 	<key>Author</key>
 	<string>Vandroiy</string>
 	<key>CodecID</key>
-	<integer>658</integer>
+	<integer>533</integer>
 	<key>CodecName</key>
-	<string>ALC292</string>
+	<string>ALC215</string>
 	<key>Files</key>
 	<dict>
 		<key>Layouts</key>
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Custom ALC292</string>
-				<key>Id</key>
-				<integer>12</integer>
-				<key>Path</key>
-				<string>layout12.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>MacPeet - alc292 for LENOVO THINKPAD T450_T450s_X240 - ManualMode</string>
-				<key>Id</key>
-				<integer>15</integer>
-				<key>Path</key>
-				<string>layout15.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>vanquybn - ALC 292 for Dell M4800</string>
+				<string>ALC215 for HP 830 G6 for 965987400abc</string>
 				<key>Id</key>
 				<integer>18</integer>
 				<key>Path</key>
 				<string>layout18.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>vusun123 - ALC 292 for Lenovo T440</string>
-				<key>Id</key>
-				<integer>28</integer>
-				<key>Path</key>
-				<string>layout28.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>ALC292 for Lenovo T450s By Echo</string>
-				<key>Id</key>
-				<integer>32</integer>
-				<key>Path</key>
-				<string>layout32.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>e6540 alc292 with dock</string>
-				<key>Id</key>
-				<integer>55</integer>
-				<key>Path</key>
-				<string>layout55.xml.zlib</string>
 			</dict>
 		</array>
 		<key>Platforms</key>
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Custom ALC292</string>
-				<key>Id</key>
-				<integer>12</integer>
-				<key>Path</key>
-				<string>Platforms12.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>MacPeet - alc292 for LENOVO THINKPAD T450_T450s_X240 - ManualMode</string>
-				<key>Id</key>
-				<integer>15</integer>
-				<key>Path</key>
-				<string>Platforms15.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>vanquybn - ALC 292 for Dell M4800</string>
+				<string>ALC215 for HP 830 G6 for 965987400abc</string>
 				<key>Id</key>
 				<integer>18</integer>
 				<key>Path</key>
 				<string>Platforms18.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>vusun123 - ALC 292 for Lenovo T440</string>
-				<key>Id</key>
-				<integer>28</integer>
-				<key>Path</key>
-				<string>Platforms28.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>ALC292 for Lenovo T450s By Echo</string>
-				<key>Id</key>
-				<integer>32</integer>
-				<key>Path</key>
-				<string>Platforms32.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>e6540 alc 292 with dock</string>
-				<key>Id</key>
-				<integer>55</integer>
-				<key>Path</key>
-				<string>Platforms55.xml.zlib</string>
 			</dict>
 		</array>
 	</dict>
@@ -169,19 +89,19 @@
 			<key>Count</key>
 			<integer>2</integer>
 			<key>Find</key>
-			<data>hBnUEQ==</data>
+			<data>ixnUEQ==</data>
 			<key>MinKernel</key>
 			<integer>13</integer>
 			<key>Name</key>
 			<string>AppleHDA</string>
 			<key>Replace</key>
-			<data>kgLsEA==</data>
+			<data>FQLsEA==</data>
 		</dict>
 		<dict>
 			<key>Count</key>
 			<integer>2</integer>
 			<key>Find</key>
-			<data>hAjsEA==</data>
+			<data>hBnUEQ==</data>
 			<key>MinKernel</key>
 			<integer>13</integer>
 			<key>Name</key>
@@ -215,6 +135,46 @@
 			<key>Replace</key>
 			<data>AAAAAA==</data>
 		</dict>
+		<dict>
+			<key>Count</key>
+			<integer>2</integer>
+			<key>Find</key>
+			<data>YgLsEA==</data>
+			<key>MinKernel</key>
+			<integer>13</integer>
+			<key>Name</key>
+			<string>AppleHDA</string>
+			<key>Replace</key>
+			<data>AAAAAA==</data>
+		</dict>
+		<dict>
+			<key>Count</key>
+			<integer>2</integer>
+			<key>Find</key>
+			<data>YQLsEA==</data>
+			<key>MinKernel</key>
+			<integer>13</integer>
+			<key>Name</key>
+			<string>AppleHDA</string>
+			<key>Replace</key>
+			<data>AAAAAA==</data>
+		</dict>
+		<dict>
+			<key>Count</key>
+			<integer>2</integer>
+			<key>Find</key>
+			<data>ihnUEQ==</data>
+			<key>MinKernel</key>
+			<integer>16</integer>
+			<key>Name</key>
+			<string>AppleHDA</string>
+			<key>Replace</key>
+			<data>AAAAAA==</data>
+		</dict>
+	</array>
+	<key>Revisions</key>
+	<array>
+		<integer>1048578</integer>
 	</array>
 	<key>Vendor</key>
 	<string>Realtek</string>

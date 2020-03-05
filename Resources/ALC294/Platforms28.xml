@@ -20,8 +20,8 @@
 	<key>PathMaps</key>
 	<array>
 		<dict>
-			<key>Comment</key>
-			<string>Realtek ALC230 for Lenovo Ideapad 320</string>
+			<key>Comments</key>
+			<string>Ayat Kyo - Realtek ALC294</string>
 			<key>PathMap</key>
 			<array>
 				<array>
@@ -55,11 +55,11 @@
 									<true/>
 								</dict>
 								<key>NodeID</key>
-								<integer>8</integer>
+								<integer>7</integer>
 							</dict>
 							<dict>
 								<key>NodeID</key>
-								<integer>35</integer>
+								<integer>36</integer>
 							</dict>
 							<dict>
 								<key>Boost</key>
@@ -108,8 +108,6 @@
 								<integer>34</integer>
 							</dict>
 							<dict>
-								<key>Boost</key>
-								<integer>3</integer>
 								<key>NodeID</key>
 								<integer>25</integer>
 							</dict>
@@ -127,7 +125,7 @@
 									<key>PublishMute</key>
 									<true/>
 									<key>PublishVolume</key>
-									<false/>
+									<true/>
 									<key>VolumeInputAmp</key>
 									<false/>
 								</dict>
@@ -176,7 +174,7 @@
 									<key>PublishMute</key>
 									<true/>
 									<key>PublishVolume</key>
-									<false/>
+									<true/>
 									<key>VolumeInputAmp</key>
 									<false/>
 								</dict>
@@ -218,7 +216,7 @@
 				</array>
 			</array>
 			<key>PathMapID</key>
-			<integer>20</integer>
+			<integer>28</integer>
 		</dict>
 	</array>
 </dict>

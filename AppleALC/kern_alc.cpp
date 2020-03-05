@@ -9,6 +9,7 @@
 #include <Headers/kern_devinfo.hpp>
 #include <Headers/plugin_start.hpp>
 #include <Library/LegacyIOService.h>
+#include <IOKit/pci/IOPCIDevice.h>
 #include <mach/vm_map.h>
 
 #include "kern_alc.hpp"
@@ -88,6 +89,20 @@ void AlcEnabler::updateProperties() {
 
 		// Secondly, update HDEF device and make it support digital audio
 		if (devInfo->audioBuiltinAnalog && validateInjection(devInfo->audioBuiltinAnalog)) {
+
+			uint32_t ven = 0;
+			if (WIOKit::getOSDataValue(devInfo->audioBuiltinAnalog, "vendor-id", ven) && ven == WIOKit::VendorID::Intel) {
+				// Intentionally using static cast to avoid PCI imports.
+				auto hdef = static_cast<IOPCIDevice *>(devInfo->audioBuiltinAnalog);
+				// Update Traffic Class Select Register to TC0.
+				// This is required for AppleHDA to output audio on some machines.
+				// See Intel I/O Controller Hub 9 (ICH9) Family Datasheet for more details.
+				static constexpr size_t RegTCSEL = 0x44;
+				auto value = hdef->configRead8(RegTCSEL);
+				DBGLOG("alc", "updating TCSEL register %X", value);
+				hdef->configWrite8(RegTCSEL, getBitField<uint8_t>(value, 7, 3));
+			}
+
 			const char *hdaGfx = nullptr;
 			if (hasBuiltinDigitalAudio && !devInfo->audioBuiltinDigital)
 				hdaGfx = "onboard-1";
@@ -193,17 +208,17 @@ void AlcEnabler::updateDeviceProperties(IORegistryEntry *hdaService, DeviceInfo 
 			}
 		}
 
-		// These seem to fix AppleHDA warnings, perhaps research them later.
-		// They are probably related to the current volume of the boot bell sound.
+		// SystemAudioVolume variable used by boot chime sound will be capped by this value.
+		// Only lower 7 bits are valid bits for volume level, 8th bit is used for muted status.
 		if (!hdaService->getProperty("MaximumBootBeepVolume")) {
 			DBGLOG("alc", "fixing MaximumBootBeepVolume in hdef");
-			uint8_t bootBeepBytes[] { 0xEE };
+			uint8_t bootBeepBytes[] { 0x7F };
 			hdaService->setProperty("MaximumBootBeepVolume", bootBeepBytes, sizeof(bootBeepBytes));
 		}
 
 		if (!hdaService->getProperty("MaximumBootBeepVolumeAlt")) {
 			DBGLOG("alc", "fixing MaximumBootBeepVolumeAlt in hdef");
-			uint8_t bootBeepBytes[] { 0xEE };
+			uint8_t bootBeepBytes[] { 0x7F };
 			hdaService->setProperty("MaximumBootBeepVolumeAlt", bootBeepBytes, sizeof(bootBeepBytes));
 		}
 
@@ -263,6 +278,39 @@ IOService *AlcEnabler::gfxProbe(IOService *ctrl, IOService *provider, SInt32 *sc
 
 	return FunctionCast(gfxProbe, callbackAlc->orgGfxProbe)(ctrl, provider, score);
 }
+
+bool AlcEnabler::AppleHDAController_start(IOService* service, IOService* provider)
+{
+	uint32_t delay = 0;
+	if (PE_parse_boot_argn("alcdelay", &delay, sizeof(delay))) {
+		DBGLOG("alc", "found alc-delay override %u", delay);
+		provider->setProperty("alc-delay", &delay, sizeof(delay));
+	} else {
+		if (WIOKit::getOSDataValue(provider, "alc-delay", delay))
+			DBGLOG("alc", "found normal alc-delay %u", delay);
+	}
+	
+	if (delay > 3000) {
+		SYSLOG("alc", "alc delay cannot exceed 3000 ms, ignore it");
+		delay = 0;
+	}
+		
+	if (delay != 0) {
+		DBGLOG("alc", "delay AppleHDAController::start for %d ms", delay);
+		IOSleep(delay);
+	}
+	return FunctionCast(AppleHDAController_start, callbackAlc->orgAppleHDAController_start)(service, provider);
+}
+
+#ifdef DEBUG
+IOReturn AlcEnabler::IOHDACodecDevice_executeVerb(void *that, uint16_t a1, uint16_t a2, uint16_t a3, unsigned int *a4, bool a5)
+{
+	IOReturn result = FunctionCast(IOHDACodecDevice_executeVerb, callbackAlc->orgIOHDACodecDevice_executeVerb)(that, a1, a2, a3, a4, a5);
+	if (result != KERN_SUCCESS)
+		DBGLOG("alc", "IOHDACodecDevice::executeVerb with parameters a1 = %u, a2 = %u, a3 = %u failed with result = %x", a1, a2, a3, result);
+	return result;
+}
+#endif
 
 uint32_t AlcEnabler::getAudioLayout(IOService *hdaDriver) {
 	auto parent = hdaDriver->getParentEntry(gIOServicePlane);
@@ -558,6 +606,20 @@ void AlcEnabler::processKext(KernelPatcher &patcher, size_t index, mach_vm_addre
 		// patch AppleHDA to remove redundant logs
 		if (!ADDPR(debugEnabled))
 			eraseRedundantLogs(patcher, kextIndex);
+	}
+	
+#ifdef DEBUG
+	if (ADDPR(debugEnabled) && !(progressState & ProcessingState::PatchHDAFamily) && kextIndex == KextIdIOHDAFamily) {
+		progressState |= ProcessingState::PatchHDAFamily;
+		KernelPatcher::RouteRequest request("__ZN16IOHDACodecDevice11executeVerbEtttPjb", IOHDACodecDevice_executeVerb, orgIOHDACodecDevice_executeVerb);
+		patcher.routeMultiple(index, &request, 1, address, size);
+	}
+#endif
+	
+	if (!(progressState & ProcessingState::PatchHDAController) && kextIndex == KextIdAppleHDAController) {
+		progressState |= ProcessingState::PatchHDAController;
+		KernelPatcher::RouteRequest request("__ZN18AppleHDAController5startEP9IOService", AppleHDAController_start, orgAppleHDAController_start);
+		patcher.routeMultiple(index, &request, 1, address, size);
 	}
 	
 	// Ignore all the errors for other processors
