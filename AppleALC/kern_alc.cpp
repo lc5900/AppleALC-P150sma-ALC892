@@ -9,7 +9,10 @@
 #include <Headers/kern_devinfo.hpp>
 #include <Headers/plugin_start.hpp>
 #include <Library/LegacyIOService.h>
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winconsistent-missing-override"
 #include <IOKit/pci/IOPCIDevice.h>
+#pragma clang diagnostic pop
 #include <mach/vm_map.h>
 
 #include "kern_alc.hpp"
@@ -89,18 +92,30 @@ void AlcEnabler::updateProperties() {
 
 		// Secondly, update HDEF device and make it support digital audio
 		if (devInfo->audioBuiltinAnalog && validateInjection(devInfo->audioBuiltinAnalog)) {
-
 			uint32_t ven = 0;
 			if (WIOKit::getOSDataValue(devInfo->audioBuiltinAnalog, "vendor-id", ven) && ven == WIOKit::VendorID::Intel) {
-				// Intentionally using static cast to avoid PCI imports.
-				auto hdef = static_cast<IOPCIDevice *>(devInfo->audioBuiltinAnalog);
-				// Update Traffic Class Select Register to TC0.
-				// This is required for AppleHDA to output audio on some machines.
-				// See Intel I/O Controller Hub 9 (ICH9) Family Datasheet for more details.
-				static constexpr size_t RegTCSEL = 0x44;
-				auto value = hdef->configRead8(RegTCSEL);
-				DBGLOG("alc", "updating TCSEL register %X", value);
-				hdef->configWrite8(RegTCSEL, getBitField<uint8_t>(value, 7, 3));
+				uint32_t updateTcsel = 0;
+				if (!PE_parse_boot_argn("alctcsel", &updateTcsel, sizeof(updateTcsel)) &&
+					!WIOKit::getOSDataValue(devInfo->audioBuiltinAnalog, "alctcsel", updateTcsel)) {
+					updateTcsel = 0;
+				}
+				if (updateTcsel != 0) {
+					// Intentionally using static cast to avoid PCI imports.
+					auto hdef = static_cast<IOPCIDevice *>(devInfo->audioBuiltinAnalog->metaCast("IOPCIDevice"));
+					if (hdef != nullptr) {
+						// Update Traffic Class Select Register to TC0.
+						// This is required for AppleHDA to output audio on some machines.
+						// See Intel I/O Controller Hub 9 (ICH9) Family Datasheet for more details.
+						static constexpr size_t RegTCSEL = 0x44;
+						auto value = hdef->configRead8(RegTCSEL);
+						DBGLOG("alc", "updating TCSEL register %X", value);
+						hdef->configWrite8(RegTCSEL, getBitField<uint8_t>(value, 7, 3));
+					} else {
+						SYSLOG("alc", "cannot access HDEF pci");
+					}
+				} else {
+					DBGLOG("alc", "disabling TCSEL update");
+				}
 			}
 
 			const char *hdaGfx = nullptr;
@@ -657,7 +672,7 @@ void AlcEnabler::updateResource(Resource type, kern_return_t &result, const void
 }
 
 void AlcEnabler::grabControllers() {
-	computerModel = WIOKit::getComputerModel();
+	computerModel = BaseDeviceInfo::get().modelType;
 
 	auto devInfo = DeviceInfo::create();
 	if (devInfo) {
