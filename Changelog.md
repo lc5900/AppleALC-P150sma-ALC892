@@ -1,9 +1,21 @@
 AppleALC Changelog
 ==================
+#### v1.5.2
+- Added missing layout7.xml for CA0132
+
 #### v1.5.1
 - Set MinKernel Catalina for 400 Series
 - Added constants for 11.0 support
 - Added 400 series 0x6c8 and 0x2c8 controller patch (thanks @lvs1974)
+- Added ALC295 layout-id 24 for HP Pavilion / OMEN-2 by zty199
+- Update CA0132 layout-id 7, 4, 2, 1 by wern-apfel
+- Added IDT92HD95 layout-id 11 by wern-apfel
+- Added Icelake Smart Sound Technology Audio Controller
+- Fix Headphone NodeID，Add SPDIFOut NodeID，ALC255 layout-id 20 for DELL 7447 by was3912734
+- Added ALC290 layout-id 15 for HP m6 n015dx by MacPeet
+- Added ALC285 layout-61 for Lenovo Yoga C740 by fewtarius
+- Added CA0132 LayoutID 99 - 5.1 channel for Alienware-M17X-R4 by DalianSky
+- Added ALC289 layout-id 11 for alienware m17r2 by leeoem
 
 #### v1.5.0
 - Update ALC283 layout-id 88 by xiaoleGun

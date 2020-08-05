@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>LayoutID</key>
-	<integer>2</integer>
+	<integer>99</integer>
 	<key>PathMapRef</key>
 	<array>
 		<dict>
@@ -492,12 +492,12 @@
 			<key>Outputs</key>
 			<array>
 				<string>IntSpeaker</string>
-				<string>LineOut</string>
 				<string>Headphone</string>
+				<string>LineOut</string>
 				<string>SPDIFOut</string>
 			</array>
 			<key>PathMapID</key>
-			<integer>2</integer>
+			<integer>1</integer>
 			<key>SPDIFOut</key>
 			<dict/>
 		</dict>
