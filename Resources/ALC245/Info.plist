@@ -5,40 +5,16 @@
 	<key>Author</key>
 	<string>Vandroiy</string>
 	<key>CodecID</key>
-	<integer>640</integer>
+	<integer>581</integer>
 	<key>CodecName</key>
-	<string>ALC280</string>
+	<string>ALC245</string>
 	<key>Files</key>
 	<dict>
 		<key>Layouts</key>
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Mirone Laptop patch ALC280</string>
-				<key>Id</key>
-				<integer>3</integer>
-				<key>Path</key>
-				<string>layout3.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Mirone Laptop patch ALC280 - Combo Jack Support</string>
-				<key>Id</key>
-				<integer>4</integer>
-				<key>Path</key>
-				<string>layout4.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Alienware alpha patch ALC280</string>
-				<key>Id</key>
-				<integer>11</integer>
-				<key>Path</key>
-				<string>layout11.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>MacPeet - Realtek ALC280 - Dell T20 - Version1 - ManualMode</string>
+				<string>lunjielee - Realtek ALC245 for HP Omen 2020</string>
 				<key>Id</key>
 				<integer>13</integer>
 				<key>Path</key>
@@ -46,66 +22,26 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>MacPeet - Realtek ALC280 - Dell T20 - Version2 - SwitchMode</string>
+				<string>ALC235 for Lenovo by soto2080</string>
 				<key>Id</key>
-				<integer>15</integer>
+				<integer>11</integer>
 				<key>Path</key>
-				<string>layout15.xml.zlib</string>
+				<string>layout11.xml.zlib</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>cowpod - Realtek ALC280 - Optiplex 9020SFF</string>
+				<string>ALC245 for Lenovo </string>
 				<key>Id</key>
-				<integer>16</integer>
+				<integer>12</integer>
 				<key>Path</key>
-				<string>layout16.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Realtek ALC280 - Optiplex 9020SFF - ManualMode</string>
-				<key>Id</key>
-				<integer>17</integer>
-				<key>Path</key>
-				<string>layout17.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Dell Precision ﻿T7610 ﻿Workstation﻿ ALC280 by Andres ZeroCross</string>
-				<key>Id</key>
-				<integer>21</integer>
-				<key>Path</key>
-				<string>layout21.xml.zlib</string>
+				<string>layout12.xml.zlib</string>
 			</dict>
 		</array>
 		<key>Platforms</key>
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Mirone resources</string>
-				<key>Id</key>
-				<integer>3</integer>
-				<key>Path</key>
-				<string>PlatformsM3.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Mirone resources Combo Jack Support</string>
-				<key>Id</key>
-				<integer>4</integer>
-				<key>Path</key>
-				<string>PlatformsM4.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Alienware alpha resources</string>
-				<key>Id</key>
-				<integer>11</integer>
-				<key>Path</key>
-				<string>Platforms11.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>MacPeet - Realtek ALC280 - Dell T20 - Version1 - ManualMode</string>
+				<string>lunjielee - Realtek ALC245 for HP Omen 2020</string>
 				<key>Id</key>
 				<integer>13</integer>
 				<key>Path</key>
@@ -113,35 +49,19 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>MacPeet - Realtek ALC280 - Dell T20 - Version2 - SwitchMode</string>
+				<string>ALC235 for Lenovo by soto2080</string>
 				<key>Id</key>
-				<integer>15</integer>
+				<integer>11</integer>
 				<key>Path</key>
-				<string>Platforms15.xml.zlib</string>
+				<string>Platforms11.xml.zlib</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>cowpod - Realtek ALC280 - Optiplex 9020SFF</string>
+				<string>ALC245 for Lenovo </string>
 				<key>Id</key>
-				<integer>16</integer>
+				<integer>12</integer>
 				<key>Path</key>
-				<string>Platforms16.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Realtek ALC280 - Optiplex 9020SFF - ManualMode</string>
-				<key>Id</key>
-				<integer>17</integer>
-				<key>Path</key>
-				<string>Platforms17.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Dell Precision ﻿T7610 ﻿Workstation﻿ ALC280 by Andres ZeroCross</string>
-				<key>Id</key>
-				<integer>21</integer>
-				<key>Path</key>
-				<string>Platforms21.xml.zlib</string>
+				<string>Platforms12.xml.zlib</string>
 			</dict>
 		</array>
 	</dict>
@@ -201,13 +121,25 @@
 			<key>Count</key>
 			<integer>2</integer>
 			<key>Find</key>
-			<data>hBnUEQ==</data>
+			<data>YQLsEA==</data>
 			<key>MinKernel</key>
 			<integer>13</integer>
 			<key>Name</key>
 			<string>AppleHDA</string>
 			<key>Replace</key>
-			<data>gALsEA==</data>
+			<data>AAAAAA==</data>
+		</dict>
+		<dict>
+			<key>Count</key>
+			<integer>2</integer>
+			<key>Find</key>
+			<data>hAjsEA==</data>
+			<key>MinKernel</key>
+			<integer>13</integer>
+			<key>Name</key>
+			<string>AppleHDA</string>
+			<key>Replace</key>
+			<data>AAAAAA==</data>
 		</dict>
 		<dict>
 			<key>Count</key>
@@ -225,7 +157,19 @@
 			<key>Count</key>
 			<integer>2</integer>
 			<key>Find</key>
-			<data>hAjsEA==</data>
+			<data>hBnUEQ==</data>
+			<key>MinKernel</key>
+			<integer>13</integer>
+			<key>Name</key>
+			<string>AppleHDA</string>
+			<key>Replace</key>
+			<data>RQLsEA==</data>
+		</dict>
+		<dict>
+			<key>Count</key>
+			<integer>2</integer>
+			<key>Find</key>
+			<data>YgLsEA==</data>
 			<key>MinKernel</key>
 			<integer>13</integer>
 			<key>Name</key>
