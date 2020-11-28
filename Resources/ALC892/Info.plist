@@ -70,13 +70,12 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-
 				<string>P150SMA</string>
 				<key>Id</key>
 				<integer>55</integer>
 				<key>Path</key>
 				<string>layout55.xml.zlib</string>
-				</dict>
+			</dict>
 			<dict>
 				<key>Comment</key>
 				<string>MacPeet - alc892 for MSi Z97S SLI Krait Edition</string>
