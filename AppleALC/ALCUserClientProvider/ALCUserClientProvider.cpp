@@ -11,34 +11,19 @@
 
 OSDefineMetaClassAndStructors(ALCUserClientProvider, IOService);
 
-bool ALCUserClientProvider::start(IOService* provider) {
-	if (!super::start(provider))
-		return false;
-	
-	auto matchingDict = IOService::nameMatching(kIOHDACodecDevice);
-	if (!matchingDict) {
-		DBGLOG("client", "failed to allocate matching dictionary");
-		return false;
-	}
-	
-	mHDACodecDevice = IOService::waitForMatchingService(matchingDict, 100000000); // Wait for 0.1s
-	matchingDict->release();
-	
-	if (!mHDACodecDevice) {
-		DBGLOG("client", "timeout in waiting for IOHDACodecDevice, will retry");
-		return false;
-	}
+IOService *ALCUserClientProvider::probe(IOService *provider, SInt32 *score) {
+	hdaCodecDevice = provider;
 
-	auto hdaController = mHDACodecDevice->getParentEntry(gIOServicePlane);
+	auto hdaController = hdaCodecDevice->getParentEntry(gIOServicePlane);
 	if (!hdaController) {
 		DBGLOG("client", "codec is missing AppleHDAController");
-		return false;
+		return nullptr;
 	}
 
 	auto hdefDevice = hdaController->getParentEntry(gIOServicePlane);
 	if (!hdefDevice) {
 		DBGLOG("client", "controller is missing HDEF device");
-		return false;
+		return nullptr;
 	}
 
 	uint32_t enableHdaVerbs = 0;
@@ -46,8 +31,15 @@ bool ALCUserClientProvider::start(IOService* provider) {
 	PE_parse_boot_argn("alcverbs", &enableHdaVerbs, sizeof(enableHdaVerbs));
 	DBGLOG("client", "device %s to send custom verbs", enableHdaVerbs != 0 ? "allows" : "disallows");
 	if (enableHdaVerbs == 0) {
-		return false;
+		return nullptr;
 	}
+
+	return this;
+}
+
+bool ALCUserClientProvider::start(IOService* provider) {
+	if (!super::start(provider))
+		return false;
 
 	// We are ready for verbs
 	DBGLOG("client", "ALCUserClient is ready for hda-verbs");
@@ -56,14 +48,12 @@ bool ALCUserClientProvider::start(IOService* provider) {
 	
 	// Publish the service
 	registerService();
-	
+
 	return true;
 }
 
 void ALCUserClientProvider::stop(IOService* provider) {
 	super::stop(provider);
-	
-	OSSafeReleaseNULL(mHDACodecDevice);
 }
 
 uint64_t ALCUserClientProvider::sendHdaCommand(uint16_t nid, uint16_t verb, uint16_t param) {
@@ -80,7 +70,7 @@ uint64_t ALCUserClientProvider::sendHdaCommand(uint16_t nid, uint16_t verb, uint
 	}
 	
 	unsigned ret = 0;
-	sharedAlc->IOHDACodecDevice_executeVerb(reinterpret_cast<void*>(mHDACodecDevice), nid, verb, param, &ret, true);
+	sharedAlc->IOHDACodecDevice_executeVerb(reinterpret_cast<void*>(hdaCodecDevice), nid, verb, param, &ret, true);
 	DBGLOG("client", "send HDA command nid=0x%X, verb=0x%X, param=0x%X, result=0x%08x", nid, verb, param, ret);
 	
 	return ret;

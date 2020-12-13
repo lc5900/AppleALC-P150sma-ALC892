@@ -1,8 +1,24 @@
 AppleALC Changelog
 ==================
+#### v1.5.6
+- Improved `alc-verbs` availability checking
+
 #### v1.5.5
 - Fixed kext loading issues on 10.8 and similar operating system
-- Added a requirement to inject `alc-verbs` or use `alc-verbs=1` argument for custom verbs
+- Added a requirement to inject `alc-verbs` or use `alcverbs=1` argument for custom verbs
+- Added ALC255 layout-id 66 for Dell Optiplex7060/7070MT(Separate LineOut) by Dynamix1997
+- Fixed Jack Sense and EAPD on ALC 236 layout ID 14 by erinviegas
+- Added VIA VT2021 layout-id 13 support for all 3 analog lineOUTs on Gigabyte GA-Z77X-D3H (rev. 1.0) by enrysan0
+- Added ALC283 layout-id 13 for (Alldo)Cube Mix Plus by Aldo97
+- Fix PinConfigs ALC662v3 for Lenovo M415-D339
+- Added ALC295 layout-id 22 for HP Spectre x360 by aleixjf
+- Added ALC285 layout-id 71 for Spectre x360 ap0xxx by jpuxdev
+- Added ALC221 layout-id 88 for HP ProDesk 400 G2 Desktop Mini PC by dragonbbc
+- Added CX8200 layout-id 80 for LG Gram 17 17z990 by rdmitry0911
+- Added ALC269 layout-id 91 for Chuwi CoreBox by Luca1991
+- Modify CX20632 layout-id 20 - Added Mic support and outputs mute controls - HP EliteDesk 800 G4/G5 mini by sisumara
+- Added ALC671 layout-id 16 for Fujitsu Q558 by sisumara
+- Added `-dev` option to alc-verb to support sending commands to all codecs
 
 #### v1.5.4
 - Improved Ice Lake controller patches by fewtarius

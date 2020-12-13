@@ -20,10 +20,11 @@ class EXPORT ALCUserClientProvider : public IOService {
 	using super = IOService;
 	OSDeclareDefaultStructors(ALCUserClientProvider);
 
-	IOService* 	mHDACodecDevice { nullptr };
+	IOService* 	hdaCodecDevice { nullptr };
 	bool		readyForVerbs	{ false	};
 
 public:
+	virtual IOService* probe(IOService *provider, SInt32 *score) override;
 	virtual bool start(IOService* provider) override;
 	virtual void stop(IOService* provider) override;
 	
