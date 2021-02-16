@@ -78,6 +78,22 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Asus x430_s4300FN by fangf2018</string>
+				<key>Id</key>
+				<integer>77</integer>
+				<key>Path</key>
+				<string>layout77.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Asus x430_s4300FN by fangf2018 (mic in and line in  mic in separated)</string>
+				<key>Id</key>
+				<integer>88</integer>
+				<key>Path</key>
+				<string>layout88.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Andres ZeroCross for Asus VivoBook Pro 17  N705UDR</string>
 				<key>Id</key>
 				<integer>22</integer>
@@ -126,6 +142,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Realtek ALC256 for Dell OptiPlex 7080</string>
+				<key>Id</key>
+				<integer>67</integer>
+				<key>Path</key>
+				<string>layout67.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Durian - Realtek ALC256 (3246) for MateBook X Pro 2019（4CH）</string>
 				<key>Id</key>
 				<integer>76</integer>
@@ -139,6 +163,14 @@
 				<integer>97</integer>
 				<key>Path</key>
 				<string>layout97.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>agasecond - Realtek ALC256 (3246) for Xiaomi Pro Enhanced 2019</string>
+				<key>Id</key>
+				<integer>69</integer>
+				<key>Path</key>
+				<string>layout69.xml.zlib</string>
 			</dict>
 		</array>
 		<key>Platforms</key>
@@ -209,6 +241,22 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Asus x430_s4300FN by fangf2018</string>
+				<key>Id</key>
+				<integer>77</integer>
+				<key>Path</key>
+				<string>Platforms77.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Asus x430_s4300FN by fangf2018 (mic in and line in  mic in separated)</string>
+				<key>Id</key>
+				<integer>88</integer>
+				<key>Path</key>
+				<string>Platforms88.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Andres ZeroCross for Asus VivoBook Pro 17  N705UDR</string>
 				<key>Id</key>
 				<integer>22</integer>
@@ -257,6 +305,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Realtek ALC256 for Dell OptiPlex 7080</string>
+				<key>Id</key>
+				<integer>67</integer>
+				<key>Path</key>
+				<string>Platforms67.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Durian - Realtek ALC256 (3246) for MateBook X Pro 2019（4CH）</string>
 				<key>Id</key>
 				<integer>76</integer>
@@ -270,6 +326,14 @@
 				<integer>97</integer>
 				<key>Path</key>
 				<string>Platforms97.xml.zlib</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>agasecond - Realtek ALC256 (3246) for Xiaomi Pro Enhanced 2019</string>
+				<key>Id</key>
+				<integer>69</integer>
+				<key>Path</key>
+				<string>Platforms69.xml.zlib</string>
 			</dict>
 		</array>
 	</dict>

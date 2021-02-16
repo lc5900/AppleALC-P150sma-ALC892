@@ -3,81 +3,33 @@
 <plist version="1.0">
 <dict>
 	<key>Author</key>
-	<string>ChalesYu</string>
+	<string>Dynamix1997</string>
 	<key>CodecID</key>
-	<integer>549</integer>
+	<integer>2199</integer>
 	<key>CodecName</key>
-	<string>ALC225</string>
+	<string>ALC897</string>
 	<key>Files</key>
 	<dict>
 		<key>Layouts</key>
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>ALC225/ALC3253 Credit vusun123</string>
+				<string>Asus_PRIME_B460M-K_ALC897</string>
 				<key>Id</key>
-				<integer>28</integer>
+				<integer>66</integer>
 				<key>Path</key>
-				<string>layout28.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Custom ALC225/ALC3253 for Dell Inspiron 17-7779 by Constanta</string>
-				<key>Id</key>
-				<integer>30</integer>
-				<key>Path</key>
-				<string>layout30.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Custom ALC225/ALC3253 by ChalesYu</string>
-				<key>Id</key>
-				<integer>33</integer>
-				<key>Path</key>
-				<string>layout33.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Custom ALC225/ALC3253 for Dell Inspiron 13-5379 by fast900</string>
-				<key>Id</key>
-				<integer>90</integer>
-				<key>Path</key>
-				<string>layout90.xml.zlib</string>
+				<string>layout66.xml.zlib</string>
 			</dict>
 		</array>
 		<key>Platforms</key>
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>ALC225/ALC3253 Credit vusun123</string>
+				<string>Asus_PRIME_B460M-K_ALC897</string>
 				<key>Id</key>
-				<integer>28</integer>
+				<integer>66</integer>
 				<key>Path</key>
-				<string>Platforms28.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Custom ALC225/ALC3253 for Dell Inspiron 17-7779 by Constanta</string>
-				<key>Id</key>
-				<integer>30</integer>
-				<key>Path</key>
-				<string>Platforms30.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Custom ALC225/ALC3253 by ChalesYu</string>
-				<key>Id</key>
-				<integer>33</integer>
-				<key>Path</key>
-				<string>Platforms33.xml.zlib</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Custom ALC225/ALC3253 for Dell Inspiron 13-5379 by fast900</string>
-				<key>Id</key>
-				<integer>90</integer>
-				<key>Path</key>
-				<string>Platforms90.xml.zlib</string>
+				<string>Platforms66.xml.zlib</string>
 			</dict>
 		</array>
 	</dict>
@@ -137,55 +89,21 @@
 			<key>Count</key>
 			<integer>2</integer>
 			<key>Find</key>
-			<data>YQLsEA==</data>
+			<data>ixnUEQ==</data>
 			<key>MinKernel</key>
 			<integer>13</integer>
 			<key>Name</key>
 			<string>AppleHDA</string>
 			<key>Replace</key>
-			<data>AAAAAA==</data>
-		</dict>
-		<dict>
-			<key>Count</key>
-			<integer>2</integer>
-			<key>Find</key>
-			<data>hQjsEA==</data>
-			<key>MinKernel</key>
-			<integer>13</integer>
-			<key>Name</key>
-			<string>AppleHDA</string>
-			<key>Replace</key>
-			<data>AAAAAA==</data>
-		</dict>
-		<dict>
-			<key>Count</key>
-			<integer>2</integer>
-			<key>Find</key>
-			<data>hBnUEQ==</data>
-			<key>MinKernel</key>
-			<integer>13</integer>
-			<key>Name</key>
-			<string>AppleHDA</string>
-			<key>Replace</key>
-			<data>JQLsEA==</data>
-		</dict>
-		<dict>
-			<key>Count</key>
-			<integer>2</integer>
-			<key>Find</key>
-			<data>YgLsEA==</data>
-			<key>MinKernel</key>
-			<integer>13</integer>
-			<key>Name</key>
-			<string>AppleHDA</string>
-			<key>Replace</key>
-			<data>AAAAAA==</data>
+			<data>lwjsEA==</data>
 		</dict>
 		<dict>
 			<key>Count</key>
 			<integer>2</integer>
 			<key>Find</key>
 			<data>gxnUEQ==</data>
+			<key>MaxKernel</key>
+			<integer>15</integer>
 			<key>MinKernel</key>
 			<integer>15</integer>
 			<key>Name</key>
@@ -193,6 +111,22 @@
 			<key>Replace</key>
 			<data>AAAAAA==</data>
 		</dict>
+		<dict>
+			<key>Count</key>
+			<integer>2</integer>
+			<key>Find</key>
+			<data>ihnUEQ==</data>
+			<key>MinKernel</key>
+			<integer>16</integer>
+			<key>Name</key>
+			<string>AppleHDA</string>
+			<key>Replace</key>
+			<data>AAAAAA==</data>
+		</dict>
+	</array>
+	<key>Revisions</key>
+	<array>
+		<integer>1049602</integer>
 	</array>
 	<key>Vendor</key>
 	<string>Realtek</string>

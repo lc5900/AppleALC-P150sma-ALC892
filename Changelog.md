@@ -1,7 +1,22 @@
 AppleALC Changelog
 ==================
+#### v1.5.7
+- Add support for legacy Macs
+- Added ALC289 layout-id 99 for Dell XPS 13 9300 by DalianSky
+- Added ALC225 layout-id 90 for Dell Inspiron 5379 by fast900
+- Added ALC274 layout-id 28 working speakers/mic Maingear Element 3 (TongFang 17 Barebone) by 343iChurch
+- Added ALC256 layout-id 77 for Asus x430_s4300FN by fangf2018
+- Added ALC256 layout-id 88 for Asus x430_s4300FN by fangf2018
+- Fix Mic for ALC221 layout-id 88 HP ProDesk 400 G2 Desktop Mini PC
+- Added ALC897 layout-id 66 for ASUS_PRIME_B460M-K by Dynamix1997
+
 #### v1.5.6
 - Improved `alc-verbs` availability checking
+- Add ALC256 layout-id 67 for Dell OptiPlex 7080
+- Add ALC222 layout-id 11 for HP EliteDesk 800 G6 Mini
+- Add ALC256 layout-id 69 for Xiaomi Pro Enhanced 2019
+- Add ALC235 layout-id 37 for Lenovo IdeaCentre Mini 5
+- CX20751_2 fixed mic gain slider in Big Sur
 
 #### v1.5.5
 - Fixed kext loading issues on 10.8 and similar operating system
