@@ -154,7 +154,7 @@
 		<key>Device</key>
 		<integer>4028</integer>
 		<key>Name</key>
-		<string>NVIDIA HDMI for Alienware Alpha GTX860M</string>
+		<string>NVIDIA HDMI for GM107 in 10.13.4 - 10.13.6</string>
 		<key>Patches</key>
 		<array>
 			<dict>
@@ -162,6 +162,8 @@
 				<integer>1</integer>
 				<key>Find</key>
 				<data>3hALDg==</data>
+				<key>MaxKernel</key>
+				<integer>17</integer>
 				<key>MinKernel</key>
 				<integer>17</integer>
 				<key>Name</key>
@@ -536,7 +538,7 @@
 		<key>Device</key>
 		<integer>3084</integer>
 		<key>Name</key>
-		<string>HD4600 controller</string>
+		<string>HD4600 HDMI Audio</string>
 		<key>Patches</key>
 		<array>
 			<dict>
@@ -650,7 +652,7 @@
 		<key>Device</key>
 		<integer>36000</integer>
 		<key>Name</key>
-		<string>Z97 HDEF controller</string>
+		<string>Z97 HDEF controller in 10.9</string>
 		<key>Patches</key>
 		<array>
 			<dict>
@@ -774,6 +776,31 @@
 				<string>AppleHDAController</string>
 				<key>Replace</key>
 				<data>hoAhjQ==</data>
+			</dict>
+		</array>
+		<key>Vendor</key>
+		<string>Intel</string>
+	</dict>
+	<dict>
+		<key>Device</key>
+		<integer>41328</integer>
+		<key>Name</key>
+		<string>100 Series (0xA170) Mobile PCH HD Audio</string>
+		<key>Patches</key>
+		<array>
+			<dict>
+				<key>Comment</key>
+				<string>Patches out AppleHDAController PCI ID check and replaces internal variable content with 9D70 to enable HDMI audio</string>
+				<key>Count</key>
+				<integer>1</integer>
+				<key>Find</key>
+				<data>DgAAvgIAAABIid8=</data>
+				<key>MinKernel</key>
+				<integer>15</integer>
+				<key>Name</key>
+				<string>AppleHDAController</string>
+				<key>Replace</key>
+				<data>DgAAuHCdAADrBpA=</data>
 			</dict>
 		</array>
 		<key>Vendor</key>
@@ -912,7 +939,7 @@
 		<key>Device</key>
 		<integer>41800</integer>
 		<key>Name</key>
-		<string>300 Series PCH HD Audio</string>
+		<string>300 Series PCH HD Audio in 10.12 - 10.13</string>
 		<key>Patches</key>
 		<array>
 			<dict>
@@ -1081,6 +1108,76 @@
 				<string>AppleHDAController</string>
 				<key>Replace</key>
 				<data>DgAAuHCdAADrBpA=</data>
+			</dict>
+		</array>
+		<key>Vendor</key>
+		<string>Intel</string>
+	</dict>
+	<dict>
+		<key>Device</key>
+		<integer>61640</integer>
+		<key>Name</key>
+		<string>500 Series(0xF0C8) PCH HD Audio</string>
+		<key>Patches</key>
+		<array>
+			<dict>
+				<key>Count</key>
+				<integer>6</integer>
+				<key>Find</key>
+				<data>cKEAAA==</data>
+				<key>MinKernel</key>
+				<integer>19</integer>
+				<key>Name</key>
+				<string>AppleHDAController</string>
+				<key>Replace</key>
+				<data>yPAAAA==</data>
+			</dict>
+			<dict>
+				<key>Count</key>
+				<integer>1</integer>
+				<key>Find</key>
+				<data>hoBwoQ==</data>
+				<key>MinKernel</key>
+				<integer>19</integer>
+				<key>Name</key>
+				<string>AppleHDAController</string>
+				<key>Replace</key>
+				<data>hoDI8A==</data>
+			</dict>
+		</array>
+		<key>Vendor</key>
+		<string>Intel</string>
+	</dict>
+	<dict>
+		<key>Device</key>
+		<integer>17352</integer>
+		<key>Name</key>
+		<string>500 Series(0x43C8) PCH HD Audio</string>
+		<key>Patches</key>
+		<array>
+			<dict>
+				<key>Count</key>
+				<integer>6</integer>
+				<key>Find</key>
+				<data>cKEAAA==</data>
+				<key>MinKernel</key>
+				<integer>19</integer>
+				<key>Name</key>
+				<string>AppleHDAController</string>
+				<key>Replace</key>
+				<data>yEMAAA==</data>
+			</dict>
+			<dict>
+				<key>Count</key>
+				<integer>1</integer>
+				<key>Find</key>
+				<data>hoBwoQ==</data>
+				<key>MinKernel</key>
+				<integer>19</integer>
+				<key>Name</key>
+				<string>AppleHDAController</string>
+				<key>Replace</key>
+				<data>hoDIQw==</data>
 			</dict>
 		</array>
 		<key>Vendor</key>

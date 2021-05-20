@@ -1,7 +1,35 @@
 AppleALC Changelog
 ==================
+#### v1.6.1
+- Fixed broken data in CS4206's layout76.xml
+- Added PathMapID 4206 and 8800 for ALC885's Layout 67 and 73
+- Fixed broken data in ALC289's layout87.xml
+- Fixed automatic resource formatting on build
+- Fixed ALC885's Info.plist Platforms entry
+
+#### v1.6.0
+- Added `use-layout-id` property to use `layout-id` as is on Macs
+- Added `use-apple-layout-id` property to use `apple-layout-id` as `layout-id` on Macs
+- Fixed CS4206 and ALC885 support for legacy Macs
+- Improvement ALC289 layout-id 87 for Alienware m15 by GitNaufal
+- Added ALC1220 layout-id 98 for Mi Gaming Notebook Creator by Xsixu
+- Added ALC1220 layout-id 100 for Hasee_G8-CU7PK by R-a-s-c-a-l
+
+#### v1.5.9
+- Added CS4206 layout-id 24 and 60
+- Added 500 Series (0xF0C8 Z590 + Intel 10 Gen) PCH HD Audio Controller
+- Added 500 Series (0x43C8 Z590 + Intel 11 Gen) PCH HD Audio Controller
+- Added ALC289 layout-id 87 for Alienware m15 by GitNaufal
+- Added ALC289 layout-id 15 for Dell 7730 Precision CM240 by MacPeet
+- Added ALC897 layout-id 69 for MSI-Z490-A Pro by mathcampbell
+- Added IDT 92HD95 layout-id 14 for LenovoG710 by Svilen88
+- Added ALC235 layout-id 18 for asrock 310 bb by viorel78
+- Added controller patch for 100 Series (8086:A170) by dhinakg
+
 #### v1.5.8
 - Improved resource packaging by stripping optional tags
+- General enhancement & improvement for ALC230 by Ab2774
+- Added ALC274 layout-id 35 by jackjack1-su
 
 #### v1.5.7
 - Add support for legacy Macs
