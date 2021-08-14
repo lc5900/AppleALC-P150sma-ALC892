@@ -33,6 +33,17 @@ public:
 	}
 	
 	/**
+	 *  executeVerb method symbol
+	 */
+#if defined(__i386__)
+	static constexpr const char *symIOHDACodecDevice_executeVerb = "__ZN16IOHDACodecDevice11executeVerbEtttPmb";
+#elif defined(__x86_64__)
+	static constexpr const char *symIOHDACodecDevice_executeVerb = "__ZN16IOHDACodecDevice11executeVerbEtttPjb";
+#else
+#error Unsupported arch
+#endif
+	
+	/**
 	 *  Hooked IOHDACodecDevice executeVerb
 	 *
 	 *  @param hdaCodecDevice IOHDACodecDevice instance
@@ -175,12 +186,33 @@ private:
 	 *  @return true if anything suitable found
 	 */
 	bool validateCodecs();
+	
+	/**
+	 *  performPowerChange method symbol
+	 */
+#if defined(__i386__)
+	static constexpr const char *symPerformPowerChange = "__ZN14AppleHDADriver23performPowerStateChangeE24_IOAudioDevicePowerStateS0_Pm";
+#elif defined(__x86_64__)
+	static constexpr const char *symPerformPowerChange = "__ZN14AppleHDADriver23performPowerStateChangeE24_IOAudioDevicePowerStateS0_Pj";
+#else
+#error Unsupported arch
+#endif
 
 	/**
 	 *  Hooked performPowerChange method triggering a verb sequence on wake
 	 */
 	static IOReturn performPowerChange(IOService *hdaDriver, uint32_t from, uint32_t to, unsigned int *timer);
 
+	/**
+	 *  Patches HDAConfigDefault property with desired pinconfig entry.
+	 */
+	void patchPinConfig(IOService *hdaCodec, IORegistryEntry *configDevice);
+	
+	/**
+	 *  Hooked initializePinConfig method to preserve AppleHDACodecGeneric instance on 10.4 and most versions of 10.5
+	 */
+	static IOReturn initializePinConfigLegacy(IOService *hdaCodec);
+	
 	/**
 	 *  Hooked initializePinConfig method to preserve AppleHDACodecGeneric instance
 	 */
@@ -190,6 +222,11 @@ private:
 	 *  AppleHDADriver::performPowerStateChange original method
 	 */
 	mach_vm_address_t orgPerformPowerChange {0};
+	
+	/**
+	 *  AppleHDACodecGeneric::initializePinConfigDefaultFromOverride original method on 10.4 and most versions of 10.5
+	 */
+	mach_vm_address_t orgInitializePinConfigLegacy {0};
 
 	/**
 	 *  AppleHDACodecGeneric::initializePinConfigDefaultFromOverride original method
@@ -225,6 +262,53 @@ private:
 	 *  @param resourceDataLength resource data length reference
 	 */
 	void updateResource(Resource type, kern_return_t &result, const void * &resourceData, uint32_t &resourceDataLength);
+	
+	/**
+	 *  Hooked AppleHDADriver start method
+	 */
+	static bool AppleHDADriver_start(IOService* service, IOService* provider);
+	
+	/**
+	 *  AppleHDADriver::start original method
+	 */
+	mach_vm_address_t orgAppleHDADriver_start {0};
+	
+	/**
+	 *  Hooked AppleHDAPlatformDriver start method
+	 */
+	static bool AppleHDAPlatformDriver_start(IOService* service, IOService* provider);
+	
+	/**
+	 *  AppleHDAPlatformDriver::start original method
+	 */
+	mach_vm_address_t orgAppleHDAPlatformDriver_start {0};
+	
+	/**
+	 *	Replace layout resources in AppleHDAPlatformDriver (AppleHDA on 10.4)
+	 *
+	 *	@param service 			IOService instance
+	 */
+	void replaceAppleHDADriverResources(IOService *service);
+	
+	/**
+	 *	Unserialize codec XML dictionary.
+	 *
+	 *	@param data				resource data
+	 *	@param dataLength	resource data length
+	 */
+	OSDictionary *unserializeCodecDictionary(const uint8_t *data, uint32_t dataLength);
+	
+	/**
+	 * Layout ID override
+	 */
+	bool layoutIdIsOverridden {false};
+	uint32_t layoutIdOverride {0};
+	
+	/**
+	 * AppleHDA uses zlib
+	 */
+	bool isAppleHDAZlib {false};
+
 #endif
 	
 	/**
@@ -325,7 +409,8 @@ private:
 			CodecsLoaded = 2,
 			CallbacksWantRouting = 4,
 			PatchHDAFamily = 8,
-			PatchHDAController = 16
+			PatchHDAController = 16,
+			PatchHDAPlatformDriver = 32
 		};
 	};
 	int progressState {ProcessingState::NotReady};

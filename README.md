@@ -15,8 +15,8 @@ English (Current)
 - Unsupported audio controller enabling (internal and external)
 - Arbitrary kext patching
 - Custom platform/layout injection
-- Works with SIP / El Capitan
-- Currently compatible with 10.8-12
+- Works with SIP / El Capitan+
+- Currently compatible with 10.4-12
 
 #### Credits
 - [Apple](https://www.apple.com) for macOS  

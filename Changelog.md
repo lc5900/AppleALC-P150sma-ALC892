@@ -1,7 +1,20 @@
 AppleALC Changelog
 ==================
+#### v1.6.4
+- Added 10.4 and 10.5 support, and 10.6 and 10.7 support in 32-bit mode
+- Update STAC9200 layout-id 11 to support 10.4 to 10.6
+- Added STAC9205 layout-id 11 for Dell Inspiron 1520 and Latitude D630
+
+#### v1.6.3
+- Update ALC289 layout-id 87 by GitNaufal
+- Update ALC235 layout-id 18 for AsRock 310 BB by viorel78
+
 #### v1.6.2
-- Added constants for 12.0 support
+- Added constants for macOS 12 support
+- Added 10.6 and 10.7 support in 64-bit mode
+- Fixed HDMI Audio 0xA171 for Acer VX5-591G by dongcodebmt
+- Added ALC256 layout-id 70 for Hasee KingBook X57S1 by m0d16l14n1
+- Update WakeConfigData for ALC255 layout-id 96 by wozhinengpa
 
 #### v1.6.1
 - Fixed broken data in CS4206's layout76.xml
