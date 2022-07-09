@@ -4,6 +4,29 @@
 <array>
 	<dict>
 		<key>Device</key>
+		<integer>3611</integer>
+		<key>Name</key>
+		<string>NVIDIA HDMI for GK107 in 10.13.4+</string>
+		<key>Patches</key>
+		<array>
+			<dict>
+				<key>Count</key>
+				<integer>1</integer>
+				<key>Find</key>
+				<data>TlZEQQ==</data>
+				<key>MinKernel</key>
+				<integer>17</integer>
+				<key>Name</key>
+				<string>AppleHDAController</string>
+				<key>Replace</key>
+				<data>3hAbDg==</data>
+			</dict>
+		</array>
+		<key>Vendor</key>
+		<string>NVIDIA</string>
+	</dict>
+	<dict>
+		<key>Device</key>
 		<integer>3599</integer>
 		<key>Name</key>
 		<string>NVIDIA HDMI for GK208 in 10.13.4+</string>
@@ -977,27 +1000,15 @@
 		<array>
 			<dict>
 				<key>Count</key>
-				<integer>6</integer>
-				<key>Find</key>
-				<data>cKEAAA==</data>
-				<key>MinKernel</key>
-				<integer>16</integer>
-				<key>Name</key>
-				<string>AppleHDAController</string>
-				<key>Replace</key>
-				<data>8KIAAA==</data>
-			</dict>
-			<dict>
-				<key>Count</key>
 				<integer>1</integer>
 				<key>Find</key>
-				<data>hoBwoQ==</data>
+				<data>DgAAvgIAAABIid8=</data>
 				<key>MinKernel</key>
 				<integer>16</integer>
 				<key>Name</key>
 				<string>AppleHDAController</string>
 				<key>Replace</key>
-				<data>hoDwog==</data>
+				<data>DgAAuHChAADrBpA=</data>
 			</dict>
 		</array>
 		<key>Vendor</key>
@@ -1129,7 +1140,7 @@
 				<key>Name</key>
 				<string>AppleHDAController</string>
 				<key>Replace</key>
-				<data>DgAAuHCdAADrBpA=</data>
+				<data>DgAAuHChAADrBpA=</data>
 			</dict>
 		</array>
 		<key>Vendor</key>
