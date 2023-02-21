@@ -190,7 +190,7 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Custom ALC892 for MSI Z370-A PRO by GeorgeWan</string>
+				<string>GeorgeWan - ALC892 for MSI-Z370-A PRO</string>
 				<key>Id</key>
 				<integer>100</integer>
 				<key>Path</key>
@@ -385,7 +385,7 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Custom ALC892 for MSI Z370-A PRO by GeorgeWan</string>
+				<string>GeorgeWan - ALC892 for MSI-Z370-A PRO</string>
 				<key>Id</key>
 				<integer>100</integer>
 				<key>Path</key>
