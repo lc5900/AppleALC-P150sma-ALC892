@@ -1,5 +1,26 @@
 AppleALC Changelog
 ==================
+#### v1.9.1
+- Added constants for macOS 15 support
+- Added ALC275 layout-id 15 for Sony Vaio SVD11225PXB by hiimpiscean
+- Improved ALC298 layout-id 15 for Dell Precision 5540 by hiimpiscean
+- Added ALC892 layout-id 21 for GIGABYTE B365M AORUS ELITE by EylinSir
+- Added ALC897 layout-id 22 for Asus VivoBook 15 OLED M513UA by andreszerocross
+- Added ALC1220 layout-id 69 for AMD B450/B550 with SwitchMode by Lorys89
+- Added ALC236 layout-id 68 for Dell Vostro 5401 by Lorys89 (use with ComboJack Tool)
+- Added ALC289 layout-id 68 for Dell XPS 7390 ICL 2in1 by Lorys89 (use with ComboJack Tool)
+- Added ALC295 layout-id 75 for Dell Inspiron 7590 (only ext mic) by Lorys89
+- Improved ALC295 layout-id 33 by Lorys89 (use with ComboJack Tool)
+- Added ALC700 layout-id 22 For NUC8i7HVK by Baio1977
+
+#### v1.9.0
+- Added ALC298 layout-id 94 for Lenovo Yoga C940 by idalin
+- Added ALC269VB layout-id 37 for Tecno T1 IceLake by Ar4erR07
+- Added ALC298 layout-id 25 for Razer Blade 15 2018 Advanced by hoaug-tran
+- Added ALC295 layout-id 33 for DELL Latitude 7210 2-in-1 by Lorys89
+- Added ALC298 layout-id 15 for DELL Precision 5540 by hiimpiscean
+- Added ALC295 layout-id 69 for Lenovo_X1_Tablet_3°Gen by Baio1977
+
 #### v1.8.9
 - Added ALC255 layout-id 80 for Acer Aspire 7 A715-42G AMD by Long5436
 - Added ALC256 layout-id 38 for Samsung Galaxy Book NT750XDA-KF59U by lshbluesky
